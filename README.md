@@ -1,14 +1,11 @@
 # Django-Practice
 
 1. **Django**
- - [Удобный сборник команд Django](Django/django_commands.md)
+ - [Сборник различных команд Django](Django/django_commands.md)
  - [Урок №1 ](Django/django_1.md) ( Установка, URL )
  - [Урок №2 ](Django/django_2.md) ( GET, POST, обработка исключений, 404 )
- - [Урок №3 ](Django/django_3.md) ( Модели, миграции, создание пользователей, модели и админка)
- - [Урок №4 ](Django/django_4.md) ( Supeuser, Получение данных из моделей )
  - [Урок №5 ](Django/django_5.md) ( Templates, Views, Jinja2, Фильтры шаблонов )
  - [Урок №6 ](Django/django_6.md) ( Подключение статических файлов )
- - [Урок №7 ](Django/django_7.md) ( Отправка Email, Установка ckeditor, настройка админки )
  - [Урок №8 ](Django/django_8.md) ( Связи между моделями, Form)
 
 2. **Безопасность настроек, модуль django-environ**
@@ -29,6 +26,8 @@
 
 1. **Модели**
       - [Взаимодействие с Моделями, БД ](models/django_sql_1.md)
+        - Установка
+      
       - [Модели](models/django_models.md)
       - [Класс Meta для моделей](Django//django_sql_2.md)
       - [Модели и ORM](models/django_sql_3.md)
@@ -40,16 +39,21 @@
       - [ Часть №1 ](models/signals_1.md)
 
 
-3.  **Миграции**
+3. **ORM**
+      - [ Часть №1 ](models/orm_1.md)
+        - Агрегации `Count, Sum, Avg, Max, Min` 
+
+
+4. **Миграции**
       - [ Миграции ](models/migrate_1.md)
       - [ Чистый SQL в миграциях  migrations.RunSQL ](models/migrate_2.md) 
 
 
-4. **Транзакции** 
+5. **Транзакции** 
    - [ Транзакции ](models/transactions_1.md)
 
 
-5. **Фикстуры**
+6. **Фикстуры**
    - [ Экспорт данных из БД `dumpdata` ](models/dumpdata_1.md)
    - [ Импорт данных из БД `loaddata` ](models/loaddata_1.md)
 
@@ -59,9 +63,48 @@
 ---
 
 1. **Admin**
-   - [ Часть №1 ](admin/admin_1.md) (регистрация моделей, `actions` Действия, `get_urls`)
-   - [ Часть №2 ](admin/admin_2.md)
+   - [ Часть №1 ](admin/admin_1.md) 
+     - Регистрация моделей в админ панели
+     - Атрибуты : 
+       - `list_display` 
+       - `list_display_links`
+       - `search_fields` 
+       - `list_filter`
+       - `list_select_related`
+       - `date_hierarchy`
+       - `actions_on_top`
+       - `actions_on_bottom`
+       - `exclude`
+       - `ordering`
+       - `paginator` 
+     
+   - [ Часть №2 ](admin/admin_2.md) 
+     - Методы действия :
+       - `save_model`
+       - `get_ordering`
+       - `delete_model`
+       - `delete_queryset`
+       - `get_paginator`
+       - `get_search_results`
+       - `get_urls`
+     - Методы шаблонов : 
+       - `changelist_view`
+       
+   - [ Часть №3 ](admin/admin_3.md)
+     - Флеш сообщения
+     
 
+[comment]: <> (   - [ Часть №10 ]&#40;admin/admin_10.md&#41;)
+
+[comment]: <> (     - Действия администратора `actions`)
+
+[comment]: <> (     - Метод `get_urls`)
+
+[comment]: <> (     - Пользовательские мтоды в `list_display`)
+
+[comment]: <> (     - Как отключить экранирование `HTML`)
+
+[comment]: <> (     - Редирект на страницу админки)
 
 ---
 Асинхронность
@@ -110,5 +153,8 @@
 ---
 Разное
 ---
+
+ - [Отправка почты Email `smtplib`](other/email.md)
+ - [Установка HTML редактора `ckeditor`](other/ckeditor.md)
 
 
