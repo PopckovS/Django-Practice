@@ -97,3 +97,130 @@ class ModelAdmin(BaseModelAdmin):
     def get_paginator(self, request, queryset, per_page, orphans=0, allow_empty_first_page=True):
         return self.paginator(queryset, per_page, orphans, allow_empty_first_page)
 ```
+
+---
+Метод `get_search_results`
+---
+Возвращает `queryset` и `boolean` значение указывающее может ли набор 
+содержать дубликаты, мы можем перегрузить этот метод.
+
+Перегружаем родительский метод
+```python
+def get_search_results(self, request, queryset, search_term):
+    queryset, may_have_duplicates = super().get_search_results(
+        request, queryset, search_term,
+    )
+    return queryset, may_have_duplicates
+```
+
+---
+Метод `get_urls`
+---
+Метод `ModelAdmin` возвращает URL адреса, которые будут использоваться для ступа к
+обьектам этой модели, этот метод расширяет базовые URL адресса.
+
+Родительский метод
+```python
+def get_urls(self):
+    from django.urls import path
+
+    def wrap(view):
+        def wrapper(*args, **kwargs):
+            return self.admin_site.admin_view(view)(*args, **kwargs)
+        wrapper.model_admin = self
+        return update_wrapper(wrapper, view)
+
+    info = self.model._meta.app_label, self.model._meta.model_name
+
+    return [
+        path('', wrap(self.changelist_view), name='%s_%s_changelist' % info),
+        path('add/', wrap(self.add_view), name='%s_%s_add' % info),
+        path('<path:object_id>/history/', wrap(self.history_view), name='%s_%s_history' % info),
+        path('<path:object_id>/delete/', wrap(self.delete_view), name='%s_%s_delete' % info),
+        path('<path:object_id>/change/', wrap(self.change_view), name='%s_%s_change' % info),
+        # For backwards compatibility (was the change url before 1.9)
+        path('<path:object_id>/', wrap(RedirectView.as_view(
+            pattern_name='%s:%s_%s_change' % ((self.admin_site.name,) + info)
+        ))),
+    ]
+```
+
+Добавляем свои собственные URL адресса к дефолтным адресам асса `ModelAdmin`, подобное
+расширение адресов может потребоваться для созданиясвоего адреса на наш метод 
+обработчик который будет реализовать свою логику, скажем добавление кастомной 
+кнопки в админ панель, и реализовать свой обработчик этой логики
+```python
+from django.conf.urls import url
+
+    def get_urls(self):
+        """Добавляем cdjq flhtcc """
+        urls = super().get_urls()
+        custom_urls = [url('^our_address/$', self.func_worker, name='our_address'), ]
+        return custom_urls + urls
+```
+
+Другой приме перегрузки метода
+```python
+from django.conf.urls import url
+    
+    def get_urls(self):
+        """Добавляем свои URL адреса для обработки нашего кастомногопредставленияю."""
+        urls = super().get_urls()
+        my_urls = [path('my_view/', self.my_view),]
+        return my_urls + urls
+    
+    def my_view(self, request):
+        """Собственный обработчик логики, и переопределяем шаблон для отображения."""
+        context = dict(
+           self.admin_site.each_context(request),
+           key=value,
+        )
+        return TemplateResponse(request, "sometemplate.html", context)
+```
+
+По дефолту все шаблоны для админ панели берутся из дефолтной Django библиотеки
+которая разворачивается в виртуальном окружении, и во время процесса разраотки,
+когда `DEBUG=False` мы можем переопределить это поведение, изменив наши шаблоны 
+локально в самом приложении, для переопределения админ панел, следует 
+переопределить шаблон `admin/base_site.html`
+
+Когда будет использоваться боевой режим `DEBUG=True` то все шаблоны будут браться 
+из директории `static` в корневой директории, что бы подтянуть все наши 
+переопределенные шаблоны для админки в директорию `static` выполнятеся команда
+
+     python3 manage.py collectstatic
+
+Если хотим пероопределять шаблоны для админ панели, то сделать это можно при
+помощи расширегния базовых шаблонов.
+
+```html
+{% extends "admin/base_site.html" %}
+{% block content %}
+...
+{% endblock %}
+```
+
+---
+Методы Шаблонов `admin.ModelAdmin`
+---
+
+Метод `changelist_view`
+---
+
+Метод управляет отображением главной страницей, страницей со списком всех 
+обьектов подключенной модели в админке, используя это мы можем перегрезить его,
+и добавить свои собственные данные контексту, передать их в шаблон и там
+отобразить, конечно для этого потребуется и дополнить сам шаблон админки Django.
+
+```python
+def changelist_view(self, request, extra_context=None):
+    extra_context = extra_context or {}
+    extra_context['total'] = self.get_total()
+    return super().changelist_view(request, extra_context=extra_context)
+```
+
+
+
+
+
+
