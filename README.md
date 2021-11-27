@@ -1,6 +1,6 @@
 # Django-Practice
 
-1. **Django**
+1. **Общие темы**
  - [Сборник различных команд Django](Django/django_commands.md)
  - [Урок №1 ](Django/django_1.md) ( Установка, URL )
  - [Урок №2 ](Django/django_2.md) ( GET, POST, обработка исключений, 404 )
@@ -26,8 +26,10 @@
 
 1. **Модели**
       - [Взаимодействие с Моделями, БД ](models/django_sql_1.md)
-        - Установка
-      
+        - Установка 
+        - Соединение к `Postgres`
+        - `Postgis`      
+
       - [Модели](models/django_models.md)
       - [Класс Meta для моделей](Django//django_sql_2.md)
       - [Модели и ORM](models/django_sql_3.md)
@@ -39,8 +41,10 @@
       - [ Часть №1 ](models/signals_1.md)
 
 
-3. **ORM**
+3. **QuerySet ORM**
       - [ Часть №1 ](models/orm_1.md)
+        - Методы QuerySet
+      - [ Часть №2 ](models/orm_2.md)
         - Агрегации `Count, Sum, Avg, Max, Min` 
 
 
@@ -92,6 +96,7 @@
        
    - [ Часть №3 ](admin/admin_3.md)
      - Флеш сообщения
+     - Логирование
      
 
 [comment]: <> (   - [ Часть №10 ]&#40;admin/admin_10.md&#41;)
@@ -156,5 +161,4 @@
 
  - [Отправка почты Email `smtplib`](other/email.md)
  - [Установка HTML редактора `ckeditor`](other/ckeditor.md)
-
-
+ - [Настройка сервера `PyCharm` для Дебага](other/debug_server.md)
