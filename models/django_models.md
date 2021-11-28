@@ -358,3 +358,56 @@ class MyModel(models.Model):
 if field_name not in self.get_exclude_filter_fields():
     pass
 ```
+
+---
+Модели, атрибут `_meta`
+---
+У моделей есть защищенный атрибут `_meta`
+
+`_meta.get_fields()` - возвращает список с обьектами полей модели
+
+```python
+self._meta.get_fields()
+
+# Вывод
+# 0 = {AutoField} creating.MenModel.id
+# 1 = {MultiSelectField} creating.MenModel.men_sex
+# 2 = {MultiSelectField} creating.MenModel.men_age
+# 3 = {MultiSelectField} creating.MenModel.men_income
+# ...
+```
+
+Используя это мы можем проитерироваться по этому списку и получить 
+все имена полей модели.
+
+Через атрибут `_meta` получаем список с названиями всех полей модели
+в виде строк.
+```python
+model_field_names = [field.name for field in self._meta.get_fields()]
+
+# Вывод
+# {str} id
+# {str} men_sex
+# {str} men_age
+# {str} men_income
+```
+
+`self.__dict__` - закрытый атрибут модели, представляет из себя словарь
+с атрибутами обьекта.
+
+Получаем словарь с названиями полей и выбранными значениями
+```python
+fields_and_values = {field.name: self.__dict__.get(field.name) for field in self._meta.get_fields()}
+
+# Вывод
+# {
+#     'id': None,
+#     'description': 'Введенное название',
+#     'men_sex': [1],
+#     'men_age': [1, 2],
+#     'home_region': [18],
+# }
+```
+
+Таким образом через атрибут `_meta` можно получить все поля и введенные
+в эти поля значения пользователем.
