@@ -20,6 +20,11 @@
 4. **Middleware**    
    - [ Часть №1 ](Django/mid_1.md)
    
+
+5. **Request / Response**
+   - [ Часть №1 ](Django/request_1.md)
+
+
 ---
 Модели
 ---
@@ -33,7 +38,7 @@
       - [Модели](models/django_models.md)
       - [Класс Meta для моделей](Django//django_sql_2.md)
       - [Модели и ORM](models/django_sql_3.md)
-      - [Поиск, приставки для фильтрации](Django/django_sql_4.md) ( objects.filter )
+      - [Поиск, приставки для фильтрации ORM](models/django_sql_4.md) ( objects.filter )
       - [QuerySets](models/django_sql_5.md)
 
 
@@ -50,6 +55,11 @@
 
 4. **Миграции**
       - [ Миграции ](models/migrate_1.md)
+        - Создание миграций
+        - Запуск миграций
+        - Фейковые миграций
+        - Откат миграций
+        - Просмотр кода SQL что будет сделан миграцией
       - [ Чистый SQL в миграциях  migrations.RunSQL ](models/migrate_2.md) 
 
 
@@ -98,6 +108,15 @@
      - Флеш сообщения
      - Логирование
      
+
+6. **Аутентификация и Авторизация**
+   - [ Часть №1 ](Auth/auth_1.md)
+     - Пользователи их создание и смена паролей 
+     - разрешения и группы ??????
+     - `login` `logout` `authenticate` - ??? 
+     
+
+
 
 [comment]: <> (   - [ Часть №10 ]&#40;admin/admin_10.md&#41;)
 
