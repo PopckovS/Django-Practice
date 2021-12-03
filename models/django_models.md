@@ -253,6 +253,86 @@ polls, sessions ведется поиск на новые миграции, в �
 
 ---
 
+Еще о создании моделей
+---
+
+Создадим еще модель с названием `Women` и интересными полями.
+
+```python
+class Women(models.Model):
+    title = models.CharField(max_length=255)
+    content = models.TextField(blank=True)
+    photo = models.ImageField(upload_to="photos/%Y/%m/%d/")
+    time_create = models.DateTimeField(auto_now_add=True)
+    time_update = models.DateTimeField(auto_now=True)
+    is_published = models.BooleanField(default=True)
+```
+
+1. `models.DateTimeField` - поле для определения даты/времени. 
+
+```python
+    time_create = models.DateTimeField(auto_now_add=True)
+    time_update = models.DateTimeField(auto_now=True)
+```
+
+`auto_now_add` - этот параметр, указывает внесение даты/времени в момент
+создания записи в БД, и больше она меняться не будет, хорошо подходит 
+для создания поля указывающего на дату загрузки.
+
+`auto_now` - автоматически задает дату/время, в момент изменения этой 
+записи в БД.
+
+2. `models.ImageField` - поле для хранения ссылки на загруженное фото,
+
+```python
+photo = models.ImageField(upload_to="photos/%Y/%m/%d/")
+```
+
+`upload_to` - параметр указывает куда сохранять img, можно указывать
+в виде шаблона с подкаталогами. По такому шаблону `/%Y/%m/%d/` 
+картинки будут загружаться каждый день в новый каталог.
+
+---
+
+Чтобы дать полю возможность быть пустым, надо дать ему именной 
+атрибут `blank = True`
+
+---
+
+У каждого из полей в модели можно определить специальное поле `verbose_name`
+именно это поле будет отражаться в полях админки, если оно не определено то 
+будет браться просто названия поля.
+
+```python
+class python_section(models.Model):
+    """Разделы уроков по python"""
+    title = models.CharField(max_length=255, verbose_name="Заголовок")
+    description = models.TextField(blank=True, verbose_name="Описание")
+    photo = models.ImageField(upload_to="photos/%Y/%m/%d/", blank=True, verbose_name="Фото")
+    time_create = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    is_published = models.BooleanField(default=True, verbose_name="Опубликовано")
+
+```
+
+---
+Установка Pillow
+---
+
+При использовании поля `models.ImageField` требуется библиотека `Pillow`
+иначе будет ошибка такого рода:
+```
+ERRORS:
+women.Women.photo: (fields.E210) Cannot use 
+ImageField because Pillow is not installed.
+        HINT: Get Pillow at https://pypi.org/project/Pillow/
+         or run command "python -m pip install Pillow".
+```
+
+Установка Pillow
+```
+pip3 install Pillow
+```
+
 ---
 
 Константы `MEDIA_ROOT` `MEDIA_URl`
