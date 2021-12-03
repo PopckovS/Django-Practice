@@ -180,6 +180,78 @@ DATABASES = {
     }
 ```
 
+---
+Создание моделей
+---
+Скажем мы хотим создать приложение `polls` которое будет создавать опрос
+пользователей, нам потребуется создать 2 модели в приложении `polls`
+
+1) Модель `Question` будет содержать 2 поля, Вопрос и Дату публикации. 
+
+2) Модель `Choice` будет содержать 2 поля, Текст выбора и Подсчет голосов,
+каждый `Choice` связан с `Question`.
+
+В файле `polls/models.py` создадим наши модели, каждая модель будет 
+задаваться как класс с именем в соответствии с таблицей в БД.
+
+Тут все взаимодействие происходит через класс models, каждая модель 
+наследуется от `django.db.models.Model` каждое свойство(поле) данного класса
+реализуется как столбец таблицы и как класс наследуемый от `models`.
+
+Каждое поле представлено своим классом:
+   
+1. `models.CharField` - реализует тип данных char
+2. `models.DateTimeField` - дата/время
+3. `models.ForeignKey` - внешний ключ
+4. `models.IntegerField` - целое число
+
+Обратим внимание, что мы не задаем первичный ключ в каждой из моделей,
+он будет создан автоматически.
+
+```python
+# импорт модуля для создания моделей
+from django.db import models
+
+# модель для вопросов с 2 полями
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField('date published')
+
+# дель для выборов опросов
+class Choice(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+```
+
+
+---
+Применение миграций `migrate`
+---
+
+Когда мы создали миграцию и посмотрели на ее `SQL` код, теперь ее 
+требуется исполнить, для этого можно воспользоваться все той же командой
+`python3 manage.py migrate` она анализирует все приложения, ищет все файлы
+в папках миграций всех приложений, и сверяет не появилось ли там новых 
+миграций, информация о том какие миграции уже были применены, хранятся в
+специальных таблицах в БД.
+
+```
+python3 manage.py migrate
+
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, polls, sessions
+Running migrations:
+  Applying polls.0001_initial... OK
+```
+
+В выводе можно увидеть что для приложений: admin, auth, contenttypes, 
+polls, sessions ведется поиск на новые миграции, в разделе 
+`Running migrations` показаны какие миграции применены к БД, строка
+`polls.0001_initial` говорит о том что для приложения `polls` применена
+миграция `0001_initial`  файла `polls/migrations/0001_initial.py`
+
+---
 
 ---
 
