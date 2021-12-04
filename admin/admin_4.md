@@ -52,3 +52,31 @@ queryset =  <QuerySet [
                 <DestenyModel: DestenyModel object (1)>
             ]>
 ```
+
+---
+Действия как методы `ModelAdmin`
+---
+
+Действия можно регистрировать не как отдельную функцию, а как метод
+класса.
+
+Так же в место присвоения описания атрибуту класса этогой функции
+дествия, можно использовать специальные декораторы 
+`@admin.action(description='')` эти декораторы сработают ка кдля методов
+класса так и для независимых функций действий
+
+```python
+from django.contrib import admin
+
+class DestenyModelAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name',)
+    actions = ['action_for_admin']
+
+    @admin.action(description='Новое действие администратора')
+    def action_for_admin(self, request, queryset):
+        print('self = ', self)
+        print('request = ', request)
+        print('queryset = ', queryset)
+
+admin.site.register(DestenyModel, DestenyModelAdmin)
+```
