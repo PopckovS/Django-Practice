@@ -124,8 +124,6 @@ class ModelAdmin(BaseModelAdmin):
 которое не будет иметь отображения, а будет отрабатывать на кастомно 
 созданную кнопку.
 
----
-
 Для регистрации нового пути, наследуем `super().get_urls()` родительский
 метод, и расширяем его дополнительным путем, регистрируем его так же как
 и обычные пути в `settings`
@@ -225,7 +223,7 @@ class MymodelAdmin(admin.ModelAdmin):
 присутствует.
 
 ---
-Как отображать HTML
+Как отключить экранирование HTML в админке
 ---
 
 Когда мы создаем пользовательский метод для отображения поля в админке, 
@@ -257,6 +255,26 @@ class MessageModelAdmin(admin.ModelAdmin):
     show_name_2.short_description = 'Ссылка на ресурс 2'
 ```
 
+---
+Редирект на страницу админки
+---
+
+Сделать редирект на другую страницу в админке можно с помощью следующего метода
+```python
+from django.contrib import admin
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 
+class ModelAdmin(admin.ModelAdmin):
+    
+    def function_for_redirect(self, request):
+        """Редирект на страницу другой модели"""
+        return HttpResponseRedirect(reverse('admin:project_model-name_changelist'))
+```
 
+Указывая в функции `reverse()` куда редиректить, для админки мы указываем 
+специальный префикс `admin:` далее указываем название приложения и через нижнее
+подчеркивание название модели на которую редиректим, далее указываем название 
+шаблона, который определяется автоматически и который можно посмотреть в методе
+`get_urls()` модели на которую делаем редирект.
