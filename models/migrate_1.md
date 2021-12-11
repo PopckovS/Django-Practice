@@ -75,7 +75,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(
+                                          auto_created=True, 
+                                          primary_key=True, 
+                                          serialize=False, 
+                                          verbose_name='ID'
+                                        )),
                 ('type', models.CharField(max_length=60, verbose_name='Категория')),
                 ('tag', models.CharField(max_length=255, verbose_name='Теги')),
             ],
@@ -83,13 +88,26 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Message',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True, 
+                                           primary_key=True, 
+                                           serialize=False, 
+                                           verbose_name='ID'
+                                           )),
                 ('type', models.CharField(max_length=60, verbose_name='Вид карточки')),
                 ('date_time', models.DateTimeField(verbose_name='Дата и время')),
                 ('address', models.CharField(max_length=120, verbose_name='Адрес')),
                 ('description', models.TextField(verbose_name='Описание происшествия')),
-                ('geo_location', models.CharField(max_length=120, null=True, verbose_name='Координаты')),
-                ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='parse.category', verbose_name='Категория обращения')),
+                ('geo_location', models.CharField(
+                                                   max_length=120, 
+                                                   null=True, 
+                                                   verbose_name='Координаты'
+                                               )),
+                ('category', models.ForeignKey(
+                                                   null=True, 
+                                                   on_delete=django.db.models.deletion.SET_NULL, 
+                                                   to='parse.category', 
+                                                   verbose_name='Категория обращения'
+                                               )),
             ],
         ),
     ]
@@ -137,7 +155,8 @@ Migrations for 'polls':
     ./manage.py migrate
 
 ---
-
+Откатить миграции
+---
 Мы можем отменять миграции, скажем, для того чтобы отменить миграцию
 для приложения `books` с номером `0003` мы можем выполнить следующую 
 команду
@@ -148,7 +167,8 @@ Migrations for 'polls':
 те состояния, что присутствовали в миграции `0002`
 
 ---
-
+Откатить все миграции до начальной
+---
 Если мы хотим сбросить все миграции для приложения, то можем использовать 
 команду `zero`
 
@@ -167,7 +187,7 @@ Migrations for 'polls':
     ./manage.py migrate --fake
 
 ---
-Где применимы фейковые миграции 
+Где применимы фейковые миграции ?
 ---
 Мы не можем взаимодействовать с таблицами в БД, если не имеем их модели,
 таким образом если мы хотим работать с таблицей то нам нужно описать ее 
@@ -250,3 +270,42 @@ python3 manage.py sqlmigrate polls 0001
 В результате получаем ответ:
 
       System check identified no issues (0 silenced)
+
+---
+Посмотреть какие миграции применены, а какие нет
+---
+Мы можем посмотреть какие из существующих файлов миграций в наших 
+приложениях применены к БД, а какие нет, сделать это можно командой
+
+    python3 manage.py showmigrations
+
+В результате получим вывод обо всех найденных в приложениях миграциях,
+и вывод были они применены или нет.
+
+```commandline
+admin
+ [X] 0001_initial
+ [X] 0002_logentry_remove_auto_add
+ [X] 0003_logentry_add_action_flag_choices
+auth
+ [X] 0001_initial
+ [X] 0002_alter_permission_name_max_length
+ [X] 0003_alter_user_email_max_length
+ [X] 0004_alter_user_username_opts
+ [X] 0005_alter_user_last_login_null
+ [X] 0006_require_contenttypes_0002
+ [X] 0007_alter_validators_add_error_messages
+ [X] 0008_alter_user_username_max_length
+ [X] 0009_alter_user_last_name_max_length
+ [X] 0010_alter_group_name_max_length
+ [ ] 0011_update_proxy_permissions
+ [ ] 0012_alter_user_first_name_max_length
+contenttypes
+ [X] 0001_initial
+ [X] 0002_remove_content_type_name
+sessions
+ [X] 0001_initial
+test1
+ [X] 0001_initial
+ [] 0002_auto_20211114_0523
+```
