@@ -20,15 +20,10 @@
 
 1. **Разное**
  - [Сборник различных команд Django](Django/django_commands.md)
- - [Урок №1 ](Django/django_1.md) ( Установка, URL )
  - [Урок №2 ](Django/django_2.md) ( GET, POST, обработка исключений, 404 )
  - [Урок №5 ](Django/django_5.md) ( Templates, Views, Jinja2, Фильтры шаблонов )
  - [Урок №6 ](Django/django_6.md) ( Подключение статических файлов )
  - [Урок №8 ](Django/django_8.md) ( Связи между моделями, Form)
- 
-2. **Безопасность настроек, модуль django-environ**
-   - [ Переменные окружения и оболочки в Linux ](Django/environment_1.md)
-   - [ Хранение данных в виртуальном окружении ](Django/venv_1.md)
 
 3. **Django Utils**
    - [ Часть №1 ](Django/django_utils_1.md)
@@ -40,6 +35,28 @@
    - [ Часть №1 ](Django/request_1.md)
 
 ---
+Начало работы
+---
+
+1. [ Установка и создание ](Start/start_1.md)
+    - Установка `Django`
+    - Создание приложения
+    - Подключение приложения
+ 
+   
+2. [ Запуск сервера ](Start/server_1.md)
+    - Убийство процесса на определенном порту
+    - Запуск сайта на сервере самого `Django`
+    - Запуск сайта на сервере `Gunicorn`
+    - Запуск сайта на сервере `Nginx`
+
+
+3. [Безопасность настроек, модуль `django-environ`](Start/venv_1.md)
+   - Переменные окружения и оболочки в Linux 
+   - Хранение настроек в переменных окружения
+   - Модуль `django-environ`
+   
+---
 Модели
 ---
 
@@ -49,11 +66,11 @@
         - Соединение к `Postgres`
         - Расширение для `PostGis`      
         
-      - [Модели](models/django_models.md)
-      - [Класс Meta для моделей](Django//django_sql_2.md)
-      - [Модели и ORM](models/django_sql_3.md)
-      - [Поиск, приставки для фильтрации ORM](models/django_sql_4.md) ( objects.filter )
-      - [QuerySets](models/django_sql_5.md)
+      - [ Модели ](models/django_models.md)
+      - [ Класс Meta для моделей ](Django//django_sql_2.md)
+      - [ Модели и ORM ](models/django_sql_3.md)
+      - [ Поиск, приставки для фильтрации ORM ](models/django_sql_4.md) ( objects.filter )
+      - [ QuerySets ](models/django_sql_5.md)
       - [ Сигналы Моделей ](models/signals_1.md)
       - [ Транзакции ](models/transactions_1.md)
 
