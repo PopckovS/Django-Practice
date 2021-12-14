@@ -139,4 +139,31 @@ ALLOWED_HOSTS=127.0.0.1,0.0.0.0,lovalhost
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=[])
 ```
 
+---
+Переменные окружения для БД `env.db_url`
+---
 
+Переменные окружения для настройки БД можно указывать как `URL`
+следующим образом
+
+    # Указывать требуется именно с таким названием
+    DATABASE_URL=postgres://postgres:123@127.0.0.1:5432/django_test_1
+
+У модуля `environ` ть спеуиальный метод `db_url()` который парсит
+`DATABASE_URL` и конвертирует его в стандартный словарь настроек, 
+но требуется что бы название переменной окружения было именно с таким
+именем `DATABASE_URL`
+
+```python
+DATABASES = {
+    'default': env.db_url()
+}
+```
+
+---
+Переменные окружения для путей к статическим файлам `env.path`
+---
+
+```python
+STATIC_ROOT = env.path('DJANGO_STATIC_ROOT', default=ROOT_DIR.path('static').root)
+```

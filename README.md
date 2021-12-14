@@ -58,7 +58,13 @@
 4. [Часть №2. Безопасность настроек, модуль `django-environ`](Start/venv_1.md)
    - Модуль `django-environ`
    - Примеры использования модуля `django-environ`
-
+   - Методы модуля `django-environ` :
+   - `env.bool`
+   - `env.str`
+   - `env.int`
+   - `env.list`
+   - `env.db_url`
+   - `env.path`
 
 ---
 Модели
