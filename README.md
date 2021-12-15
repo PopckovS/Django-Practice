@@ -55,7 +55,7 @@
    - Переменные окружения и модуль `os.environ`
    
 
-4. [Часть №2. Безопасность настроек, модуль `django-environ`](Start/venv_2 .md)
+4. [Часть №2. Безопасность настроек, модуль `django-environ`](Start/venv_2.md)
    - Модуль `django-environ`
    - Примеры использования модуля `django-environ`
    - Методы модуля `django-environ` :
