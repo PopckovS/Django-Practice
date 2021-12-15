@@ -55,7 +55,7 @@
    - Переменные окружения и модуль `os.environ`
    
 
-4. [Часть №2. Безопасность настроек, модуль `django-environ`](Start/venv_2.md)
+4. [Часть №2. Безопасность настроек, модуль `django-environ`](Start/venv_2 .md)
    - Модуль `django-environ`
    - Примеры использования модуля `django-environ`
    - Методы модуля `django-environ` :
@@ -112,10 +112,10 @@
         - Запуск миграций
         - Фейковые миграций
         - Откат миграций
-        - Просмотр кода SQL что будет сделан миграцией
+        - Просмотр кода `SQL` что будет сделан миграцией
         
       - [ №2 Миграции ](models/migrate_2.md) 
-        - Чистый SQL в миграциях `migrations.RunSQL`
+        - Чистый `SQL` в миграциях `migrations.RunSQL`
 
 
 4. **Фикстуры**
@@ -204,8 +204,10 @@
    - [ Часть №3 ](async/celery_3.md) (Flower логер сообщений для Celery)
 
 
-2. **Django_rq**
-   - [ Часть №1 ](async/django_rq_1.md)
+2. [ Django_rq ](async/django_rq_1.md)
+   - Что такое `Django_rq` 
+   - Функции коллбэки `on_success`, `on_failure`
+   
 
 ---
 Тестирование

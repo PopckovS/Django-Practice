@@ -267,7 +267,7 @@ python3 manage.py sqlmigrate polls 0001
 
       python3 manage.py check
 
-В результате получаем ответ:
+Если ошибок нет, то в результате получаем ответ:
 
       System check identified no issues (0 silenced)
 
