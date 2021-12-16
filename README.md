@@ -225,6 +225,7 @@
 2. [ Django_rq ](async/django_rq_1.md)
    - Что такое `Django_rq` 
    - Функции коллбэки `on_success`, `on_failure`
+   - Как отлаживать асинхронный код в `django-rq`
    
 
 ---

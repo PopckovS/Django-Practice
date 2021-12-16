@@ -34,3 +34,35 @@ enqueue(func_for_async, param_1, param_2,
     on_failure=on_failure_job_callback
 )
 ```
+
+---
+Отладка асинхронного кода `django-rq`
+---
+
+Ситуация, у нас есть основная программаи ряд мест где происходит запус 
+асинхронного кода, то есть запуск `job` для того что бы отладить такой
+код нам требуется либо на момент отладки отключить асинхронность и вызывать
+код синхронно.
+
+Мы можем отклчюить выполнение асинхронного кода для `django-rq` вабще. 
+
+Настройки для `django-rq`
+
+```python
+RQ_QUEUES = {
+    'default': {
+        'HOST': env.str('REDIS_HOST_BROKER'),
+        'PORT': env.int('REDIS_PORT_BROKER'),
+        'DB': env.int('REDIS_DB_BROKER'),
+        'DEFAULT_TIMEOUT': env.int('RQ_DEFAULT_TIMEOUT', default=300),
+    }
+}
+```
+
+Отключаем асинхронность для `django-rq`
+```python
+RQ_QUEUES = locals().setdefault('RQ_QUEUES', dict())
+
+for queueConfig in RQ_QUEUES.values():
+    queueConfig['ASYNC'] = False
+```
