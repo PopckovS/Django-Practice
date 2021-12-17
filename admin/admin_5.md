@@ -71,8 +71,8 @@ class MyAdminSite(admin.AdminSite):
         
         # сортируем приложения в том порядке в котором они 
         # перечислены в методе get_app_priority
-        app_list = [app_dict[app] for app in get_app_priority()]
-
+        app_list = [app_dict[app] for app in get_app_priority()] if app_dict else list()
+        
         return app_list
 ```
 Таким образом мы сортируем наши зарегистрированные приложения в админке, но у каждого
