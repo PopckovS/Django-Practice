@@ -136,3 +136,7 @@ class Images(models.Model):
         ]
     )
 ```
+
+[//]: # (# TODO)
+[//]: # (Формы :)
+[//]: # (    from django.contrib.auth.forms import UserCreationForm)
