@@ -137,6 +137,50 @@ class Images(models.Model):
     )
 ```
 
+---
+Валидатор регулярных выражений `RegexValidator`
+---
+`RegexValidator` - Валидатор с проверкой по регулярному выражению. 
+
+- `regex` - задает регулярное выражение для проверки
+- `message` - вывод сообщения если текст не соответствует регулярному выражению 
+
+---
+Валидация телефонов через регулярные выражения `RegexValidator`
+---
+Для валидации телефонных номеров в `Django` мы можем использовать
+регулярные выражения через стандартный валидатор `RegexValidator`
+
+Пример
+```python
+# Для перевода текста
+from django.utils.translation import ugettext_lazy as _
+
+# импортируем валидатор для регулярных выражений
+from django.core.validators import RegexValidator
+
+
+PhoneValidator = RegexValidator(
+    regex=r'^\+?1?\d{9,15}$',
+    message=_("Phone number must be entered in the format: '+999999999'.")
+)
+
+class MyModel(models.Model):    
+    first_name = models.CharField(max_length=150, verbose_name=_('first name'))
+    last_name = models.CharField(max_length=150, verbose_name=_('last name'))
+    phone_number = models.CharField(
+        validators=[PhoneValidator], 
+        max_length=17, 
+        blank=False, 
+        verbose_name=_('phone')
+    )
+```
+
+
+
+
+
+
 [//]: # (# TODO)
 [//]: # (Формы :)
 [//]: # (    from django.contrib.auth.forms import UserCreationForm)
