@@ -22,10 +22,10 @@
 
 1. **Разное**
  - [Сборник различных команд Django](Django/django_commands.md)
- - [Урок №2 ](Django/django_2.md) ( GET, POST, обработка исключений, 404 )
- - [Урок №5 ](Django/django_5.md) ( Templates, Views, Jinja2, Фильтры шаблонов )
- - [Урок №6 ](Django/django_6.md) ( Подключение статических файлов )
- - [Урок №8 ](Django/django_8.md) ( Связи между моделями, Form)
+ - [Урок №2 ](Django/django_2.md) `GET`, `POST`, обработка исключений, `404`
+ - [Урок №5 ](Django/django_5.md) `Templates`, `Views`, `Jinja2`, Фильтры шаблонов
+ - [Урок №6 ](Django/django_6.md) Подключение статических файлов
+ - [Урок №8 ](Django/django_8.md) Связи между моделями, Form
 
 3. **Django Utils**
    - [ Часть №1 ](Django/django_utils_1.md)
@@ -35,6 +35,16 @@
    
 5. **Request / Response**
    - [ Часть №1 ](Django/request_1.md)
+
+---
+Администрирование `Linux` `Devops`
+---
+
+1. [ Сборник всех команд ](Devops/1.md)
+ 
+
+2. [ Команды Linux ](Devops/2.md)  
+    
 
 ---
 Начало работы
@@ -183,9 +193,12 @@
      
 
    - [ Дефолтная регистрация и авторизация в Django ](Auth/auth_2.md)
-     - Формы самого `Django` 
      - Регистрация пользователей через форму `UserCreationForm`
      - Авторизация пользователей через форму `UserCreationForm`
+
+
+   - [ Модуль OAuth ](Auth/auth_3.md)
+
 
 ---
 Представления `html`, `css`, `js` 
@@ -209,6 +222,14 @@
    - Что такое `Django_rq` 
    - Функции коллбэки `on_success`, `on_failure`
    - Как отлаживать асинхронный код в `django-rq`
+
+---
+Работа с `GraphQL` и `Hasura`
+---
+
+1. [ Начало работы с `GraphQL` и `Hasura` :](hasura/1.md)
+
+
 
 ---
 Django Rest Framework `DRF`, `SSO`
