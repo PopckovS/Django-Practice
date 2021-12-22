@@ -227,8 +227,8 @@
 Работа с `GraphQL` и `Hasura`
 ---
 
-1. [ Начало работы с `GraphQL` и `Hasura` :](hasura/1.md)
-
+1. [ Начало работы с `GraphQL` и `Hasura` :](hasura/GraphQl_1.md)
+    
 
 
 ---
