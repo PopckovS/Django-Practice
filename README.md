@@ -44,7 +44,17 @@
  
 
 2. [ Команды Linux ](Devops/2.md)  
-    
+   -  Сеть `iptables` и `ufw`
+
+---
+СУБД `PostgresQL`
+---
+
+1. [ Часть №1 ](Postgres/postgres_1.md)
+    - Утилита `psql`
+    - Управление пользователем в `Postgres` 
+    - Создание БД
+
 
 ---
 Начало работы
@@ -177,9 +187,10 @@
 ---
 
    - [ Часть №1 ](Validator/validator_1.md)
-     - Валидаторы в виде функции
+     - Валидаторы в виде функции `ValidationError`
      - Валидация файлов на размер и формат
-
+     - Валидаторы :
+     - `RegexValidator`
 
 
 ---
@@ -227,9 +238,9 @@
 Работа с `GraphQL` и `Hasura`
 ---
 
-1. [ Начало работы с `GraphQL` и `Hasura` :](hasura/GraphQl_1.md)
-    
-
+1. [ Часть №1 :](hasura/GraphQl_1.md)
+    - Что такое `GraphQL` и `Hasura`
+    - Запуск `Hasura` локально в докере 
 
 ---
 Django Rest Framework `DRF`, `SSO`
