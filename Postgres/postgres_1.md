@@ -23,10 +23,10 @@
 --
 К БД можно подключаться через URL 
 
+    # Шаблон
     postgres://<пользователь>:<пароль>@<хост>:<порт>/<название БД>
 
-Пример
-
+    # Пример
     postgres://postgres:postgrespassword@postgres:5432/db_name
 
 
@@ -84,6 +84,31 @@
 
     # Если таблиц не обнаружено то поулчим вывод
     No relations found.
+
+---
+Утилита `pg_dump`
+---
+
+[ Почитать про `pg_dump` ](https://postgrespro.ru/docs/postgresql/11/app-pgdump)
+
+`pg_dump` - утилита для создания дампов СУБД `Postgres`, можно делать как
+дамп локальной Бд так и удаленной.
+
+Дамп только схемы БД
+
+> pg_dump --host <хост> --port <порт> --username <пользователь> --blobs --verbose --encoding utf-8 --schema-only --file "путь к файлу" "название бд"
+
+
+Дамп всей БД
+
+> pg_dump --host <хост> --port <порт> --username <пользователь> --blobs --verbose --encoding utf-8 --file "путь к файлу" "название бд"
+
+
+Пример запроса
+
+>pg_dump --host 192.168.4.197 --port 5432 --username postgres --blobs --verbose --encoding utf-8 --file "/home/sergio/Документы/Проекты/bd_name/bd_name" "bd_name"
+
+
 
 
 ---
