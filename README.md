@@ -23,10 +23,40 @@ Backend разработка.
 Сервер `Gunicorn` / `Nginx` + `Django` 
 ---
 
-1. **[ Запуск сервера ](Server/server_1.md)**
+1. **[ Сервер `Gunicorn` ](Server/gunicorn_1.md)**
     - Запуск сайта на сервере `Gunicorn`
+
+
+2. **[ Сервер `Nginx` ](Server/nginx_1.md)**
     - Запуск сайта на сервере `Nginx`
 
+---
+Docker, Docker-compose
+---
+
+[ Удобный сборник команд ](Docker/docker_commands.md)
+
+1. **[Docker : ](Docker/docker_1.md)**
+    - Образы и контейнеры `Images`, `Container`
+    - Файл `Dockerfile`
+    - Просмотр логов
+
+
+2. **[ Docker-Compose : ](Docker/docker_compose_1.md)** 
+    - Файл `docker-compose.yml`
+    - Как работает `volumes`
+
+
+---
+GIT и Git-flow
+---
+[ Удобный сборник команд `git` ](git/commands.md)
+
+1. [ Система контроля версий `GIT` ](git/git_1.md)
+    - `git rebase`
+    - Конфликты
+    - Теги
+  
 
 ---
 Настройка Django
@@ -71,9 +101,9 @@ Backend разработка.
         - Настройка подключения к `Postgres` и расширение `PostGis`
 
       - [ №1 Модели ](Models/Models_1.md)
-        - Поля моделей
+        - Поля моделей:
         - Связи между моделями
-        - Атрибуты полей модели: 
+        - Атрибуты полей модели:
           - `on_delete`, `db_index`
         - Ссылка модели на саму себя
           
