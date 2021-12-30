@@ -1,5 +1,15 @@
 Backend разработка.
 ---
+Это сборник различной полезной информации и решения практических 
+задача по `Backend` разработке, от `Devops` до создания `Django` проектов.
+
+---
+Теория
+---
+
+1. [ Архитектура ]( Theory/1.md )
+    - Монолитная архитектура `SOA`
+    - Микросервисная архитектура
 
 ---
 Администрирование `Linux` `Devops`
@@ -11,6 +21,10 @@ Backend разработка.
 1. **[ Команды Linux ](Devops/2.md)**  
    - Сеть `iptables` и утилита `ufw`
 
+
+2. [ Механизм **CI / CD** ](Devops/Lesson_CI_CD.md)
+
+
 ---
 СУБД `PostgresQL` и его администрирование
 ---
@@ -18,9 +32,9 @@ Backend разработка.
 1. **[ Часть №1 ](Postgres/postgres_1.md)**
     - Утилита `psql`, `pg_dump`
     - Взаимодействие с СУБД `Postgres` через терминал
-    
+    - Расширение `TimescaleDB`
 ---
-Сервер `Gunicorn` / `Nginx` + `Django` 
+Сервер `Gunicorn` /  `Nginx` + `Django` 
 ---
 
 1. **[ Сервер `Gunicorn` ](Server/gunicorn_1.md)**
@@ -47,6 +61,10 @@ Docker, Docker-compose
     - Как работает `volumes`
 
 
+3. [ Практика Docker ](Docker/docker_2.md)
+    - `Django` проект в контейнере 
+    - `Postgres` БД в контейнере
+
 ---
 GIT и Git-flow
 ---
@@ -55,7 +73,8 @@ GIT и Git-flow
 1. [ Система контроля версий `GIT` ](git/git_1.md)
     - `git rebase`
     - Конфликты
-    - Теги
+    - Тэги `git tag`
+    - Система ведения репозиториев `Git-flow`
   
 
 ---
@@ -133,8 +152,7 @@ GIT и Git-flow
 
 3. **Миграции**
       - [ №1 Миграции ](Models/migrate_1.md)
-        - Создание, применение и откат миграций
-        - Фейковые миграций
+        - Создание, применение и откат миграций, фейковые миграции.
         - Просмотр кода `SQL` что будет сделан миграцией
         - Чистый `SQL` в миграциях `migrations.RunSQL`
         
@@ -152,23 +170,16 @@ GIT и Git-flow
 
 1. **[ Часть №1 ](admin/admin_1.md)** 
    - Регистрация моделей в админ панели
-   - Атрибуты : 
-     - `list_display`, `list_display_links`, `search_fields`, `list_filter` 
-     - `list_select_related`, `date_hierarchy`, `actions_on_top`
-     - `actions_on_bottom`, `exclude`, `ordering`, `paginator` 
+   - Управление видом моделей в админке 
 
      
 2. **[ Часть №2 ](admin/admin_2.md)** 
-    - Методы класса админки:
-      - `save_model`, `get_ordering`, `delete_model`, `get_urls` 
-      - `get_paginator`, `get_search_results`, `delete_queryset`
-    - Методы шаблонов : 
-      - `changelist_view`
+    - Методы класса админки
 
        
 3. **[ Часть №3 ](admin/admin_3.md)**
     - Флеш сообщения `messages`
-    - Логирование `logging`
+    - Логирование `logging`s
 
         
 4. **[ Часть №4 ](admin/admin_4.md)**
@@ -186,10 +197,9 @@ GIT и Git-flow
 ---
 
 1. **[ Формы №1 ](Form/form_1.md)** 
-     - Класс форм 
-     - Классы для описания полей формы
-     - `CharField`
+     - Класс форм и типы полей формы
      
+
 2. **[ Формы №2 ](Form/form_2.md)**
      - Токен `csrf` 
      

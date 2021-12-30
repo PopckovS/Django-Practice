@@ -85,6 +85,12 @@ from django.conf import settings
   >URL_PREFIX = env.str('DJANGO_URL_PREFIX', default='')
   >```
 
-  
+  - `STATIC_ROOT`
+  > указывает директорию относительно корня проекта, сюда будут
+  > скопированы статические файлы из приложений при использовании команды сборки 
+  > статический файлов
+  > 
+  >`python3 manage.py collectstatic`
+
 
 
