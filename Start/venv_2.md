@@ -40,7 +40,7 @@ BASE_DIR = os.path.dirname(
 # репу. Считываем этот файл с настройками с помощью env.read_env()
 # и таким образом получаем настройки дял проекта которые не 
 # комитятся в репозиторий
-path_to_env_file = os.path.join(BASE_DIR, 'venv' , '.env')
+path_to_env_file = os.path.join(BASE_DIR, 'venv', '.env')
 env.read_env(path_to_env_file)
 
 # Далее через переменную env можем получать доступ к переменным
@@ -131,7 +131,7 @@ VAR_3 = env.str('VAR_3', 'VAR_3')
 Обычно переменные окружения как список указываются через `:` но 
 модуль `Django` парсит их через запятую, указывайте так.
 ```
-ALLOWED_HOSTS=127.0.0.1,0.0.0.0,lovalhost
+ALLOWED_HOSTS=127.0.0.1,0.0.0.0,localhost
 ```
 
 Настройки
