@@ -1,5 +1,33 @@
-Утилита `psql` для работы с СУБД `PostgreSQL`
+Что такое `Peer`
 ---
+
+Входим в postgres как суперпользователь
+
+    sudo -u postgres psql
+
+Меняем пароль для пользователя
+
+    ALTER USER postgres PASSWORD '<new-password>';
+
+Меняем настройки доступа в файле с настройками для постгресса, он 
+находится по пути
+`/etc/postgresql/<postgres_version>/main/pg_hba.conf`
+
+Меняем доступ с `peer`
+
+    local   all         all                  peer
+
+на доступ типа `md5`
+
+    local   all         all                  md5
+
+Перезагружаем сервис постгресса
+
+     sudo service postgresql restart
+
+
+---
+Утилита `psql` для работы с СУБД `PostgreSQL`
 ---
 
 При установке `PostgreSQL` по дефолту с ним устанавливается утилита `psql`
@@ -92,7 +120,10 @@
 [ Почитать про `pg_dump` ](https://postgrespro.ru/docs/postgresql/11/app-pgdump)
 
 `pg_dump` - утилита для создания дампов СУБД `Postgres`, можно делать как
-дамп локальной Бд так и удаленной.
+дамп локальной Бд, так и удаленной.
+
+Утилита `pg_dump` находится по пути `/usr/bin/pg_dump`
+
 
 Дамп только схемы БД
 
@@ -107,8 +138,6 @@
 Пример запроса
 
 >pg_dump --host 192.168.4.197 --port 5432 --username postgres --blobs --verbose --encoding utf-8 --file "/home/sergio/Документы/Проекты/bd_name/bd_name" "bd_name"
-
-
 
 
 ---
@@ -137,10 +166,64 @@
     Если все удачно получим сообщение
     > ALTER DATABASE
 
+  
 
+---
+Расширение `TimescaleDB`
+---
 
+[Почитать про это](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-timescaledb-on-ubuntu-18-04-ru)
 
+`timescaledb` - база данных с открытым исходным кодом, 
+оптимизированная для хранения данных временного ряда. 
+Она реализуется как расширение PostgreSQL и сочетает в себе
+удобство реляционных баз данных и быстродействие баз данных NoSQL. 
+Таким образом, она позволяет использовать PostgreSQL 
+для хранения бизнес-данных и данных временного ряда в одном месте.
 
+С начала устанавливает репозиторий в саму ОС
 
+```
+sudo add-apt-repository ppa:timescale/timescaledb-ppa
 
+sudo apt update
 
+sudo apt install timescaledb-postgresql-10
+```
+
+---
+
+Для того что бы `timescaledb` можно было установить в postgreSQL
+как расширение, потребуется отредактировать файл с настройками 
+`postgresql.conf`
+
+Проходим по пути, где находится файл настроек для конкретной версии 
+`postgresql`
+
+```
+/etc/postgresql/10/main/postgresql.conf
+```
+
+Редактируем файл
+
+```
+sudo nano postgresql.conf
+```
+
+Меняем настройки
+
+```
+# заменяем эту настройку
+shared_preload_libraries = ''             # (change requires restart)
+
+# указывая timescaledb
+shared_preload_libraries = 'timescaledb'  # (change requires restart)
+```
+
+Далее перезагружаем сервис `postgresql`
+
+```
+sudo service postgresql restart
+```
+
+После этого `timescaledb` станет доступным в списке расширений постгресса
