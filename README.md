@@ -61,7 +61,7 @@ Docker, Docker-compose
     - Как работает `volumes`
 
 
-3. [ Практика Docker ](Docker/docker_2.md)
+3. [ Практика Docker ](Docker/docker_compose_2.md)
     - `Django` проект в контейнере 
     - `Postgres` БД в контейнере
 
