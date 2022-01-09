@@ -8,8 +8,7 @@ Backend разработка.
 ---
 
 1. [ Архитектура ]( Theory/1.md )
-    - Монолитная архитектура `SOA`
-    - Микросервисная архитектура
+    - Монолитная и Микросервисная архитектура
 
 ---
 Администрирование `Linux` `Devops`
@@ -64,6 +63,7 @@ Docker, Docker-compose
 3. [ Практика Docker ](Docker/docker_compose_2.md)
     - `Django` проект в контейнере 
     - `Postgres` БД в контейнере
+    - `MetaBase` бизнес-аналитика в контейнере
 
 ---
 GIT и Git-flow
@@ -75,7 +75,16 @@ GIT и Git-flow
     - Конфликты
     - Тэги `git tag`
     - Система ведения репозиториев `Git-flow`
-  
+    
+---
+Работа с `GraphQL` и `Hasura`
+---
+
+1. **[ Часть №1 :](hasura/GraphQl_1.md)**
+    - Что такое `GraphQL`, `Hasura` в докере
+    - Типы запросов `query`, `mutation`, `subscription`
+    - Отношения `object` и `array`
+
 
 ---
 Настройка Django
@@ -262,15 +271,6 @@ GIT и Git-flow
    - Что такое `Django_rq` 
    - Функции коллбэки `on_success`, `on_failure`
    - Как отлаживать асинхронный код в `django-rq`
-
----
-Работа с `GraphQL` и `Hasura`
----
-
-1. **[ Часть №1 :](hasura/GraphQl_1.md)**
-    - Что такое `GraphQL`, `Hasura` в докере
-    - Типы запросов `query`, `mutation`, `subscription`
-    - Отношения `object` и `array`
 
 ---
 Django Rest Framework `DRF`, `SSO`
