@@ -60,10 +60,10 @@ Docker, Docker-compose
     - Как работает `volumes`
 
 
-3. [ Практика Docker ](Docker/docker_compose_2.md)
-    - `Django` проект в контейнере 
-    - `Postgres` БД в контейнере
-    - `MetaBase` бизнес-аналитика в контейнере
+3. [ Примеры запуска сервисов в Docker-Compose ](Docker/docker_compose_2.md)
+    - `Postgres` БД в `Docker-Compose`
+    - `Django` + `Postgres` в `Docker-Compose`
+    - `MetaBase` + `Postgres` в `Docker-Compose`
 
 ---
 GIT и Git-flow
