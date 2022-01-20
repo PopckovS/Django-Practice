@@ -61,9 +61,10 @@ Docker, Docker-compose
 
 
 3. [ Примеры запуска сервисов в Docker-Compose ](Docker/docker_compose_2.md)
-    - `Postgres` БД в `Docker-Compose`
-    - `Django` + `Postgres` в `Docker-Compose`
-    - `MetaBase` + `Postgres` в `Docker-Compose`
+    - `Postgres` 
+    - `Django` + `Postgres` 
+    - `MetaBase` + `Postgres`
+    - `Django` + `Django Celery` + `Redis` 
 
 ---
 GIT и Git-flow

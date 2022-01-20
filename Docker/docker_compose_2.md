@@ -242,15 +242,50 @@ services:
 в его административной части, тут мы только запускаем контейнер БД
 для хранения мета данных самого `Metabase`
 
-``` 
-DATABASE_URL=postgres://postgres:777@main_postgres:5432/microservices
+---
+Запуск `Django` + `Django Celery` + `Redis` в `docker-compose`
+---
 
-docker run -d -p 9002:3000 \
-  -e "MB_DB_TYPE=postgres" \
-  -e "MB_DB_DBNAME=microservices" \
-  -e "MB_DB_PORT=9002" \
-  -e "MB_DB_USER=postgres" \
-  -e "MB_DB_PASS=777" \
-  -e "MB_DB_HOST=main_postgres" \
-  --name metabase metabase/metabase
+Нам требуется запустить проект на `Django` и `Celery` для асинхронности,
+`Redis` как бэк энд результатов.
+
+Создадим 3 сервиса, один для `Django` один для `Celery` который будет 
+собираться с того же проекта, что и с `Django`, `Redis` можно запустить
+из официального образа который мы возьмем с `Docker Hub` 
+
+```yaml
+version: '3.5'
+services:
+
+  # Сервер на Django
+  project_django:
+    build:
+      context: ./project
+      dockerfile: DockerFileDjango
+      network: host
+    container_name: project_django
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - project_redis
+    env_file:
+      - ./.env
+
+  # Celery для Django
+  project_celery:
+    container_name: project_celery
+    build:
+      context: ./project
+      dockerfile: DockerFileCelery
+      network: host
+    depends_on:
+      - project_django
+      - project_redis
+    env_file:
+      - ./.env
+
+  # Redis для Django + Celery
+  project_redis:
+    image: redis:alpine
 ```
