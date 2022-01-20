@@ -161,7 +161,7 @@ services:
 > БД из которых `MetaBase` может черпать данные может быть несколько,
 > их можно указывать в самом `MetaBase` во время непосредственной работы,
 > но ! У нас есть 2 варианта подключения БД `Postgres` для хранения мета 
-> данных самого `MetaBase` мы можем развернуть отдельный контейнер для 
+> ?данных самого `MetaBase` мы можем развернуть отдельный контейнер для 
 > `Postgres` в котором и будем хранить данные самого `MetaBase` и подключение
 > к этой `Postgres` будет указано в переменных окружения с которыми будет 
 > запущен сам контейнер `MetaBase` таким образом в этой БД `Postgres` и будут 
@@ -176,10 +176,7 @@ services:
 > системные таблицы самого `MetaBase`
 >
 > Лучше всего запускать один контейнер для `MetaBase` и один контейнер для
-> той БД что будет хранить его данные и соединяться с этой БД с помощью
-> переменных окружения которые мы укажим на этапе создания контейера, всегда 
-> старайтесь запускать сразу 2 контейнера один для `MetaBase` и `Postgres`
-> для хранения его мета данных.
+> той БД что будет хранить его данные, так и поступим. 
 
 [Почитать про переменные окружения для запуска MetaBase](https://www.metabase.com/docs/latest/operations-guide/environment-variables.html)
 
@@ -289,3 +286,51 @@ services:
   project_redis:
     image: redis:alpine
 ```
+
+В папке `project` храним наш `Django` проект со всеми приложениями и файлом
+`DockerFileDjango`
+
+Файл `DockerFileDjango` служит для сборки образа `Django` проекта:
+
+```dockerfile
+FROM python:3.8
+
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /usr/src/app
+
+COPY ./requirements.txt .
+
+RUN pip install -r requirements.txt
+
+COPY . .
+
+RUN chmod +x ./docker-entrypoint.sh
+ENTRYPOINT [ "./docker-entrypoint.sh" ]
+```
+
+Этот файл `DockerFileDjango` запускает файл с командами запуска контейнера
+`docker-entrypoint.sh` в котором исполняются следующие команды с запуском
+фикстур и запуском сервера.
+
+```dockerfile
+#!/bin/bash
+
+echo "Применяем миграции"
+python manage.py migrate
+
+echo "Запускаем фикстуры"
+python manage.py loaddata fixtures/*
+
+echo "Запуск сервера"
+python manage.py runserver 0.0.0.0:8000
+```
+
+Все эти шаги позволяют нам запустить контейнер с `Django` проектом, 
+`Celery` запускается на основе того же проекта, но требует иные команды 
+ запуска контейнера, по этому мы имеем 2 файла для запуска контейнера,
+файл `DockerFileDjango` служит для запуска `Djnago` проекта.
+Файл `DockerFileCelery` хранится в том же проекте, но служит для запуска
+`Celery` проекта.
+
+
