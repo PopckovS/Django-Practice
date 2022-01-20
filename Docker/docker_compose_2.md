@@ -333,4 +333,45 @@ python manage.py runserver 0.0.0.0:8000
 Файл `DockerFileCelery` хранится в том же проекте, но служит для запуска
 `Celery` проекта.
 
+Файл `DockerFileCelery`
+```dockerfile
+FROM python:3.8
 
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /usr/src/app
+
+COPY ./requirements.txt .
+
+RUN pip install -r requirements.txt
+
+COPY . .
+
+CMD celery -A server worker -l INFO
+```
+
+Командой `celery -A server worker -l INFO` мы запускаем `Celery`
+
+`Redis` используется для связи как бэк энд результатов, самом `Django` проекте
+в настройках `settings.py` есть раздел для настроек `Celery`
+
+```python
+# ------------------------------------------------------------------------------
+# НАСТРОЙКИ ДЛЯ CELERY
+# ------------------------------------------------------------------------------
+
+# В файле .env CELERY_BROKER_URL=redis://project_redis:6379`
+CELERY_BROKER_URL = env.str('CELERY_BROKER_URL')
+
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+
+CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+```
+
+Название сервиса `project_redis` для `Redis` используется для указания сервиса
+и порта где будет запущен сам `Redis`.
