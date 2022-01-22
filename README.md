@@ -65,6 +65,7 @@ Docker, Docker-compose
     - `Django` + `Postgres` 
     - `MetaBase` + `Postgres`
     - `Django` + `Django Celery` + `Redis` 
+    - `Nginx` + `Vue`
 
 ---
 GIT и Git-flow
