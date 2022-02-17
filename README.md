@@ -55,12 +55,16 @@ Docker, Docker-compose
     - Просмотр логов
 
 
-2. **[ Docker-Compose : ](Docker/docker_compose_1.md)** 
+2. **[ №1 Docker-Compose : ](Docker/docker_compose_1.md)** 
     - Файл `docker-compose.yml`
     - Как работает `volumes`
 
 
-3. [ Примеры запуска сервисов в Docker-Compose ](Docker/docker_compose_2.md)
+3. **[ №2 Docker-Compose : ](Docker/docker_compose_2.md)**
+    - Порядок запуска контейнеров 
+
+
+4. **[ Примеры запуска сервисов в Docker-Compose ](Docker/docker_compose_3.md)**
     - `Postgres` 
     - `Django` + `Postgres` 
     - `MetaBase` + `Postgres`
