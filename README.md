@@ -32,6 +32,10 @@ Backend разработка.
     - Утилита `psql`, `pg_dump`
     - Взаимодействие с СУБД `Postgres` через терминал
     - Расширение `TimescaleDB`
+
+
+2. **[ Часть №2 ](Postgres/postgres_2.md)**
+
 ---
 Сервер `Gunicorn` /  `Nginx` + `Django` 
 ---
