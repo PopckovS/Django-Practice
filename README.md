@@ -102,7 +102,7 @@ GIT и Git-flow
 
 
 ---
-Клиент `Vue.js`
+Фронт `Vue.js`
 ---
 
 1. **[ Часть №1 :](Vue/vue_1.md)**
@@ -113,9 +113,8 @@ GIT и Git-flow
 Настройка Django
 ---
 
-1. [ Установка и создание ](Start/start_1.md)
+1. [ Установка и начало ](Start/start_1.md)
     - Установка `Django`. Создание и подключение приложений
-    - Тестового сервера самого `Django`
 
 
 2. [ Часть №1. Безопасность настроек. Переменные окружения ](Start/venv_1.md)
@@ -194,8 +193,7 @@ GIT и Git-flow
       - [ Фикстуры ](Models/fixtures.md)
         - Выгрузка данных из БД `dumpdata`
         - Загрузка данных в БД `loaddata`
-
-
+        
 ---
 Админка
 ---
@@ -211,7 +209,7 @@ GIT и Git-flow
        
 3. **[ Часть №3 ](admin/admin_3.md)**
     - Флеш сообщения `messages`
-    - Логирование `logging`s
+    - Логирование `logging`
 
         
 4. **[ Часть №4 ](admin/admin_4.md)**
@@ -243,9 +241,7 @@ GIT и Git-flow
 1. **[ Часть №1 ](Validator/validator_1.md)**
      - Валидаторы в виде функции `ValidationError`
      - Валидация файлов на размер и формат
-     - Валидаторы :
      - `RegexValidator`
-
 
 ---
 Регистрация и Аутентификация в `Django`
@@ -270,15 +266,11 @@ GIT и Git-flow
 ---
 
 1. **[ Статические файлы и переопределения шаблонов ](View/view_1.md)**
-   - Пути `url` к представлениям
-   - Шаблонизатор `Jinja2`
-   - Шаблоны их наследование и фильтры, `url` в шаблонах
-   - Страницы ошибок и редиректы
-
-
+   - Пути `url` к представлениям. Шаблонизатор `Jinja2`.
+   - Фильтры, `url` в шаблонах. Страницы ошибок и редиректы
+   
 [//]: # (2. **[ Часть №1 ]&#40;View/view_2.md&#41;**)
 [//]: # (   - Статические файлы)
-
 
 ---
 Асинхронность
@@ -299,7 +291,7 @@ GIT и Git-flow
 Django Rest Framework `DRF`, `SSO`
 ---
 
-1. [Django Rest Framework `DRF` :](DRF)
+1. Django Rest Framework `DRF`
       - [ Основы `DRF` ](DRF/drf_1.md) 
       - [ API Фильтрация, Поиск, Сортировка ](DRF/drf_2.md)
       - [ Аутентификация `OAuth` ](DRF/drf_3.md) 
@@ -311,6 +303,15 @@ Django Rest Framework `DRF`, `SSO`
       - Что такое `DRF-SSO`
 
 ---
+Тестирование
+---
+ 
+1. **Unit Test**
+   - [ Часть №1 ](Django/UnitTest_1.md)
+
+
+
+---
 Разное
 ---
 
@@ -319,16 +320,6 @@ Django Rest Framework `DRF`, `SSO`
  - [ Установка HTML редактора `ckeditor` ](other/ckeditor.md)
  - [ Настройка сервера `PyCharm` для Дебага ](other/debug_server.md)
  - [ Трансляция, перевод на другие языки. ](other/translation.md)
-
-
----
-Тестирование
----
- 
-1. **Unit Test**
-   - [ Часть №1 ](Django/UnitTest_1.md)
-
-
 
 
 
