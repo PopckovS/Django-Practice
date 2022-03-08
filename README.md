@@ -130,7 +130,7 @@ GIT и Git-flow
 
 
 ---
-Основное 
+Основное Django
 ---
 [Сборник различных команд Django](Django/django_commands.md)
 
@@ -308,8 +308,6 @@ Django Rest Framework `DRF`, `SSO`
  
 1. **Unit Test**
    - [ Часть №1 ](Django/UnitTest_1.md)
-
-
 
 ---
 Разное
