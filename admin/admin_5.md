@@ -1,3 +1,31 @@
+---
+Управления самой админ панелью
+---
+
+Мы можем управлять отображением самой админ панели, для этого мы можем создать 
+свой класс админ панели и унаследовать его от `django.contrib.admin.AdminSite`,
+далее мы можем сделать этот класс классом управления админ панелью, сделать 
+это можно так.
+
+Файл `admin.py`
+```python
+from django.contrib.admin import AdminSite
+from django.utils.translation import ugettext_lazy
+from django.contrib import admin
+
+class MyAdminSite(AdminSite):
+    """Управление административной панелью"""
+    site_title = ugettext_lazy('My site admin')
+    site_header = ugettext_lazy('My administration')
+    index_title = ugettext_lazy('Site administration')
+
+# делаем созданную админ панель текущей 
+admin_site = MyAdminSite()
+
+# меняем заголовок панели админки
+admin.site.site_header = 'Генерация отчетов'
+```
+
 ----
 Убрать приложения пользователи и группы из админ панели
 ----
