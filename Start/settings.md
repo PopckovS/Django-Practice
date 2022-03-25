@@ -92,5 +92,19 @@ from django.conf import settings
   > 
   >`python3 manage.py collectstatic`
 
+  - DJANGO_DATABASE_CONN_MAX_AGE=60
+  > Время жизни соединения с базой данных. По умолчанию обычно выставляют: 60 с
+  > 
+  > Файл с переменными окружения `env`:
+  > 
+  >`DJANGO_DATABASE_CONN_MAX_AGE=60`
+  > 
+  > Файл настроек `settings.py`:
+  > ```
+  > DATABASES = {
+  > ...
+  > 'CONN_MAX_AGE': env.int('DJANGO_DATABASE_CONN_MAX_AGE', default=60),
+  > ...
+  > ```
 
 
