@@ -7,11 +7,11 @@ Backend разработка.
 Теория
 ---
 
-1. [ Архитектура ]( Theory/1.md )
-    - Монолитная и Микросервисная архитектура
+1. **[ Архитектура ]( Theory/1.md )**
+    - Монолитная и Микро сервисная архитектура
 
 
-2. [ Паттерны ]( Theory/2.md )
+2. **[ Паттерны ]( Theory/2.md )**
     - `Singleton`
 
 
@@ -19,14 +19,17 @@ Backend разработка.
 Администрирование `Linux` `Devops`
 ---
 
-**[ Сборник всех команд ](Devops/1.md)**
+**[ Сборник горячих команд ](Devops/1.md)**
  
 
-1. **[ Команды Linux ](Devops/2.md)**  
+1. **[ Работа с Linux ](Devops/2.md)**
+
+
+2. **[ Работа с сетью в Linux ](Devops/3.md)**  
    - Сеть `iptables` и утилита `ufw`
 
 
-2. [ Механизм **CI / CD** ](Devops/Lesson_CI_CD.md)
+2. **[ Механизм CI / CD ](Devops/Lesson_CI_CD.md)**
 
 
 ---
@@ -83,9 +86,9 @@ Docker, Docker-compose
 ---
 GIT и Git-flow
 ---
-[ Удобный сборник команд `git` ](git/commands.md)
+**[ Удобный сборник команд `git` ](git/commands.md)**
 
-1. [ Система контроля версий `GIT` ](git/git_1.md)
+1. **[ Система контроля версий `GIT` ](git/git_1.md)**
     - `git rebase`
     - Конфликты
     - Тэги `git tag`
@@ -119,55 +122,55 @@ Web
 Настройка Django
 ---
 
-1. [ Установка и начало ](Start/start_1.md)
+1. **[ Установка и начало ](Start/start_1.md)**
     - Установка `Django`. Создание и подключение приложений
 
 
-2. [ Часть №1. Безопасность настроек. Переменные окружения ](Start/venv_1.md)
+2. **[ Часть №1. Безопасность настроек. Переменные окружения ](Start/venv_1.md)**
    - Переменные окружения и оболочки в `Linux` 
    - Хранение настроек в переменных окружения и модуль `os.environ`
    
 
-3. [ Часть №2. Безопасность настроек, модуль `django-environ` ](Start/venv_2.md)
+3. **[ Часть №2. Безопасность настроек, модуль `django-environ` ](Start/venv_2.md)**
    - Модуль `django-environ` его методы и примеры использования.
 
 
-4. [ Настройки проекта `Django`. Файл `settings.py`](Start/settings.md)
+4. **[ Настройки проекта `Django`. Файл `settings.py`](Start/settings.md)**
 
 
 ---
 Основное Django
 ---
-[Сборник различных команд Django](Django/django_commands.md)
+**[Сборник различных команд Django](Django/django_commands.md)**
 
 
-1. [ Request / Response ](Django/request_1.md)
+1. **[ Request / Response ](Django/request_1.md)**
     
 
-2. [ Django Utils ](Django/django_utils_1.md)
+2. **[ Django Utils ](Django/django_utils_1.md)**
    
 
-3. [ Middleware ](Django/mid_1.md)
+3. **[ Middleware ](Django/mid_1.md)**
    
 ---
 Модели, Запросы, Миграции
 ---
 1. **Модели**
-      - [ Установка. Создание Моделей ](Models/connect.md)
+      - **[ Установка. Создание Моделей ](Models/connect.md)**
         - Настройка подключения к `Postgres` и расширение `PostGis`
         - Создание моделей
 
-      - [ №1 Модели ](Models/Models_1.md)
+      - **[ №1 Модели ](Models/Models_1.md)**
         - Поля моделей и их опции
         - Поля для связей и поля для `GEO`
         - Ссылка модели на саму себя
 
-      - [ №2 Модели ](Models/Models_4.md)
+      - **[ №2 Модели ](Models/Models_4.md)**
         - Настройки `MEDIA_ROOT`, `MEDIA_URl` для загрузки файлов
         - Класс модели `Meta`
         - Транзакции 
         
-      - [ №3 Модели, Инспектор, Схемы, Множество БД. ](Models/Models_5.md)
+      - **[ №3 Модели, Инспектор, Схемы, Множество БД. ](Models/Models_5.md)**
         - Автоматическая генерация моделей, инспектор баз данных `inspectdb`
         - Работа с разными схемами, множественное подключение к разным БД
         - Маршрутизаторы баз данных
@@ -175,17 +178,17 @@ Web
 
 2. **Запросы ORM**
 
-      - [ №1 ORM ](Models/orm_0.md)
+      - **[ №1 ORM ](Models/orm_0.md)**
         - Что такое `QuerySet` и его методы
         
-      - [ №2 ORM ](Models/orm_1.md)
+      - **[ №2 ORM ](Models/orm_1.md)**
         - Методы: 
         - `save`, `create`, `all`, `get`, `filter`, `exclude`, `update`, `bulk_create`
         - Ограничения `LIMIT` и `OFFSET`
         - Приставки для фильтрации
         - Примеры запросов
 
-      - [ №3 ORM ](Models/orm_2.md)
+      - **[ №3 ORM ](Models/orm_2.md)**
         - Выполнение прямых `SQL` запросов к БД
         - Агрегации `Count, Sum, Avg, Max, Min` 
         - Примеры запросов `ORM` :
@@ -193,15 +196,15 @@ Web
           
 
 3. **Миграции**
-      - [ №1 Миграции ](Models/migrate_1.md)
+      - **[ №1 Миграции ](Models/migrate_1.md)**
         - Создание, применение и откат миграций, фейковые миграции.
         - Просмотр кода `SQL` что будет сделан миграцией
         - Чистый `SQL` в миграциях `migrations.RunSQL`
         
-      - [ №2 Миграции ](Models/migrate_2.md) 
+      - **[ №2 Миграции ](Models/migrate_2.md)** 
         - Ошибки при использовании миграций
         
-      - [ Фикстуры ](Models/fixtures.md)
+      - **[ Фикстуры ](Models/fixtures.md)**
         - Выгрузка данных из БД `dumpdata`
         - Загрузка данных в БД `loaddata`
         - Фикстуры из системных моделей
@@ -216,21 +219,18 @@ Web
 
      
 2. **[ Часть №2 ](admin/admin_2.md)** 
-    - Методы класса админки
-
-       
-3. **[ Часть №3 ](admin/admin_3.md)**
-    - Флеш сообщения `messages`
-    - Логирование `logging`
-
+    - Методы жизненного цикла админки:
+    - `save_model`, `delete_model`, `delete_queryset`, `get_ordering`,
+   `get_paginator`, `get_search_results`, `get_urls`
+    
         
-4. **[ Часть №4 ](admin/admin_4.md)**
+3. **[ Часть №4 ](admin/admin_4.md)**
     - Действия администратора
     - Как делать редирект на страницу админки
     - Отключение экранирования `HTML` в админке
 
 
-5. **[ Часть №5 ](admin/admin_5.md)**
+4. **[ Часть №5 ](admin/admin_5.md)**
     - Управление порядком приложений и моделей в админке
     - Управление административной панелью
     - `admin.site.index_template` ???
@@ -246,7 +246,6 @@ Web
 2. **[ Формы №2 ](Form/form_2.md)**
      - Токен `csrf` 
      
-
 ---
 Валидаторы
 ---
@@ -290,9 +289,9 @@ Web
 ---
 
 1. **Django + Celery**
-   - [ Часть №1 ](async/celery_1.md) (Установка)
-   - [ Часть №2 ](async/celery_2.md) (Начало работы)
-   - [ Часть №3 ](async/celery_3.md) (Flower логер сообщений для Celery)
+   - **[ Часть №1 ](async/celery_1.md)(Установка)**
+   - **[ Часть №2 ](async/celery_2.md)(Начало работы)**
+   - **[ Часть №3 ](async/celery_3.md)(`Flower` логер сообщений для `Celery`)**
 
 
 2. **[ Django_rq ](async/django_rq_1.md)**
@@ -305,34 +304,33 @@ Django Rest Framework `DRF`, `SSO`
 ---
 
 1. Django Rest Framework `DRF`
-      - [ Основы `DRF` ](DRF/drf_1.md) 
-      - [ API Фильтрация, Поиск, Сортировка ](DRF/drf_2.md)
-      - [ Аутентификация `OAuth` ](DRF/drf_3.md) 
-      - [ Документирование `Swagger` ](DRF/drf_4.md) 
+      - **[ Основы `DRF` ](DRF/drf_1.md)**
+      - **[ API Фильтрация, Поиск, Сортировка ](DRF/drf_2.md)**
+      - **[ Аутентификация `OAuth` ](DRF/drf_3.md)**
+      - **[ Документирование `Swagger` ](DRF/drf_4.md)**
       
 
-2.  [ Django Rest Framework SSO ](DRF-SSO/drf-sso_1.md)
+2.  **[ Django Rest Framework SSO ](DRF-SSO/drf-sso_1.md)**
       - Что такое `JWT` токены
       - Что такое `DRF-SSO`
+      
+---
+Разное `Django`
+---
+- **[ Флеш сообщения `messages` ](admin/admin_3.md)**
+- **[ Логирование `logging` ](other/logging_1.md)**
+- **[ Гео-кодирование, Модуль `GeoDjango` ](GeoDjango/geo_django_1.md)**
+- **[ Отправка почты Email `smtplib` ](other/email.md)**
+- **[ Установка HTML редактора `ckeditor` ](other/ckeditor.md)**
+- **[ Настройка сервера `PyCharm` для Дебага ](other/debug_server.md)**
+- **[ Трансляция, перевод на другие языки. ](other/translation.md)**
 
 ---
 Тестирование
 ---
  
 1. **Unit Test**
-   - [ Часть №1 ](Django/UnitTest_1.md)
-
----
-Разное
----
-
- - [ Гео-кодирование, Модуль `GeoDjango` ](GeoDjango/geo_django_1.md)
- - [ Отправка почты Email `smtplib` ](other/email.md)
- - [ Установка HTML редактора `ckeditor` ](other/ckeditor.md)
- - [ Настройка сервера `PyCharm` для Дебага ](other/debug_server.md)
- - [ Трансляция, перевод на другие языки. ](other/translation.md)
-
-
+   - **[ Часть №1 ](Django/UnitTest_1.md)**
 
 
 [//]: # (4. **Cookiecutter**)
