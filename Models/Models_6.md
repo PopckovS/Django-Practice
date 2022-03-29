@@ -1,12 +1,22 @@
-Валидация
+Валидация полей модели
 ---
 
 [ Почитать про валидаторы ](https://djangodoc.ru/3.1/ref/validators/)
 
+**Замечание**
+> Существует 2 способа валидации, первый способ это функции валидаторы
+> которые можно повесить на поля модели, данный способ позволит 
+> проверять на корректность только те данные что приходят в это поле,
+> мы не сможем иметь допуск к другим полям формы.
+> 
+> Так что если требуется создавать уникальную валидацию, где разрешенное 
+> значение для одного поля зависит от параметров другого поля, то для этого
+> требуется использовать валидацию на уровне самой формы.
+
 ---
 Функция валидации
 ---
-Валида торы выполнены в виде функций, эти функции указываются в 
+Валидаторы выполнены в виде функций, эти функции указываются в 
 полях модели данные которых мы хотим проверять, в специальном 
 атрибуте `validators=[]` можно указывать целый список различных
 валидаторов.
@@ -96,6 +106,10 @@ class MyForm(forms.Form):
 Валидация модели формат и размер на загружаемых файлов.
 ---
 
+В самом `Django` по дефолт есть валидатор для проверки расширений загружаемых
+файлов, `FileExtensionValidator` используем его, и в добавок напишим свой
+собственный валидатор для проверки размера файла.
+
 ```python
 from django.db import models
 
@@ -160,16 +174,16 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.validators import RegexValidator
 
 
-PhoneValidator = RegexValidator(
-    regex=r'^\+?1?\d{9,15}$',
-    message=_("Phone number must be entered in the format: '+999999999'.")
-)
-
 class MyModel(models.Model):    
     first_name = models.CharField(max_length=150, verbose_name=_('first name'))
     last_name = models.CharField(max_length=150, verbose_name=_('last name'))
     phone_number = models.CharField(
-        validators=[PhoneValidator], 
+        validators=[
+            RegexValidator(
+                regex=r'^\+?1?\d{9,15}$',
+                message=_("Phone number must be entered in the format: '+999999999'.")
+            )
+        ], 
         max_length=17, 
         blank=False, 
         verbose_name=_('phone')
