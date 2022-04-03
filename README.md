@@ -287,16 +287,28 @@ Web
 Асинхронность
 ---
 
-1. **Django + Celery**
-   - **[ Часть №1 ](async/celery_1.md)(Установка)**
-   - **[ Часть №2 ](async/celery_2.md)(Начало работы)**
-   - **[ Часть №3 ](async/celery_3.md)(`Flower` логер сообщений для `Celery`)**
+1. **[ `Django` + `Celery` + периодические задачи ](Celery/Celery_1.md)**
+    - Установка, Настройка, периодические задачи
+    
+
+2. [ `Django` + `Celery` + `Flower` менеджер асинхронных задач ](Celery/Celery_2.md)
+    - Что такое `Flower`
 
 
-2. **[ Django_rq ](async/django_rq_1.md)**
+3. **[ Django_rq ](Celery/django_rq_1.md)**
    - Что такое `Django_rq` 
    - Функции коллбэки `on_success`, `on_failure`
    - Как отлаживать асинхронный код в `django-rq`
+
+
+[//]: # (1. **Django + Celery**)
+
+[//]: # (   - **[ Часть №1 ]&#40;Celery/celery_1.md&#41;&#40;Установка&#41;**)
+
+[//]: # (   - **[ Часть №2 ]&#40;Celery/celery_2.md&#41;&#40;Начало работы&#41;**)
+
+[//]: # (   - **[ Часть №3 ]&#40;Celery/celery_3.md&#41;&#40;`Flower` логер сообщений для `Celery`&#41;**)
+
 
 ---
 Django Rest Framework `DRF`, `SSO`
