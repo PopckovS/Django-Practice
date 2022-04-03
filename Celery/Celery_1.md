@@ -326,4 +326,119 @@ def post_counter_update():
 
 После этого приложение будет запущено и сможет выполниться асинхронно.
 
+---
+Celery Периодические задачи
+---
+Для выполнения периодических задач потребуется еще один пакет для 
+`Celery` это модуль `beat` установим его :
+
+    pip3 install django_celery_beat
+
+Установим `beat` приложение :
+
+```python
+INSTALLED_APPS = [
+    ...
+    
+    'django_celery_beat',
+
+    ...
+]
+```
+
+Так же `django_celery_beat` имеет свои таблицы, выполним его миграции :
+
+```
+>> python3 manage.py migrate
+
+Operations to perform:
+  Apply all migrations: admin, app, auth, contenttypes, django_celery_beat, sessions
+
+Running migrations:
+  Applying django_celery_beat.0001_initial... OK
+  Applying django_celery_beat.0002_auto_20161118_0346... OK
+  Applying django_celery_beat.0003_auto_20161209_0049... OK
+  Applying django_celery_beat.0004_auto_20170221_0000... OK
+  Applying django_celery_beat.0005_add_solarschedule_events_choices... OK
+  Applying django_celery_beat.0006_auto_20180322_0932... OK
+  Applying django_celery_beat.0007_auto_20180521_0826... OK
+  Applying django_celery_beat.0008_auto_20180914_1922... OK
+  Applying django_celery_beat.0006_auto_20180210_1226... OK
+  Applying django_celery_beat.0006_periodictask_priority... OK
+  Applying django_celery_beat.0009_periodictask_headers... OK
+  Applying django_celery_beat.0010_auto_20190429_0326... OK
+  Applying django_celery_beat.0011_auto_20190508_0153... OK
+  Applying django_celery_beat.0012_periodictask_expire_seconds... OK
+  Applying django_celery_beat.0013_auto_20200609_0727... OK
+  Applying django_celery_beat.0014_remove_clockedschedule_enabled... OK
+  Applying django_celery_beat.0015_edit_solarschedule_events_choices... OK
+```
+
+---
+Настройки для периодической работы
+---
+
+В том же приложении `app/tasks.py`, зарегистрируем задачи для периодической работы :
+
+В файле `app/tasks.py`
+```python
+@app.task
+def post_counter_update():
+    post = Post.objects.get(pk=1)
+    post.view_count += 1
+    post.save()
+    print('Объект Post pk = %s обновлен, количество просмотров = %s' % (post.pk, post.view_count))
+```
+
+В файле `TimeOut/celery.py` где мы регистрируем наше приложение `Celery`
+нам потребуется зарегистрировать функцию которая и будет выполняться
+периодические:
+
+```python
+import os
+from celery import Celery
+from celery.schedules import crontab
+
+# set the default Django settings module for the 'celery' program.
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "TimeOut.settings")
+
+app = Celery("TimeOut")
+
+# Using a string here means the worker doesn't have to serialize
+# the configuration object to child processes.
+# - namespace='CELERY' means all celery-related configuration keys
+#   should have a `CELERY_` prefix.
+app.config_from_object("django.conf:settings", namespace="CELERY")
+
+# Load task modules from all registered Django app configs.
+app.autodiscover_tasks()
+
+# ===========
+# Периодические задачи
+# ===========
+
+app.conf.beat_schedule = {
+    
+    # регистрация периодической задачи
+    'app-post_counter_update': {
+        
+        # регистрируем функцию для периодического запуска
+        # указываем путь и название к функции
+        # название : путь к функции 
+        'task': 'app.tasks.post_counter_update', 
+        
+        # указываем время исполнения, минимальное время 1 минута 
+        # чтобы указать полночь - `crontab(minute=0, hour=0)`
+        'schedule': crontab(),  
+    },
+}
+```
+
+Для запуска периодических задач, нам потребуется запустить приложение
+`beat` в новом терминале :
+
+```
+celery -A TimeOut beat
+```
+
 
