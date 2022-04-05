@@ -441,4 +441,26 @@ app.conf.beat_schedule = {
 celery -A TimeOut beat
 ```
 
+---
+Запуск `Celery` из `Django Templater` 
+---
+Когда мы используем `Celery` с не стандартной структурой приложения `Django`
+к примеру с использованием какого нибудь шаблона проектов, то для запуска
+`Celery` и `Celery beat` следует указывать пути к приложению `Celery` 
+
+Указываем путь к приложению `Celery` если приложение находится по пути
+`config/settings/celery.py`
+```
+   celery -A config.settings worker --loglevel=info
+```
+
+Указываем путь к приложению `Celery beat` если приложение находится по пути
+`config/settings/celery.py`
+```
+   celery -A config.settings beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+```
+
+
+
+
 

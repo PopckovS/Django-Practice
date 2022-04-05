@@ -66,3 +66,29 @@ RQ_QUEUES = locals().setdefault('RQ_QUEUES', dict())
 for queueConfig in RQ_QUEUES.values():
     queueConfig['ASYNC'] = False
 ```
+
+---
+---
+---
+---
+---
+
+
+    pip3 install django-rq
+    pip3 install django-rq-scheduler
+
+
+Запускаем воркер в отдельном терминале, запускаем с настройками `default`,
+
+    python manage.py rqworker default
+
+Если был пароль не пуст в настройках `default` может возникнуть проблема : 
+
+    Client sent AUTH, but no password is set
+
+
+
+
+
+
+
