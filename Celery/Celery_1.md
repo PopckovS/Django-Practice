@@ -120,12 +120,24 @@ Flower – это легкий веб-инструмент для монитор
 
     pip3 install Celery
 
-    pip3 install celery==5.0.5 redis==3.5.3 flower==0.9.7
+    pip3 install celery==5.2.3 redis==3.5.3 flower==0.9.7
 
 Или установка `Celery` совместно с другими пакетами для работы.
 
-Для использования `Redis` в качестве транспорта сообщений 
-или в качестве бэкэнда:
+> Важное.
+> 
+> На данный момент устанавливать следует следующую версию `Celery`:
+> ```
+> pip install celery==5.2.3
+> ```
+> С версией выше этой, есть ошибка при запуске, следующего типе, эта ошибка на 
+> данный момент не исправлена:
+> ```
+> ...
+> AttributeError: 'EntryPoint' object has no attribute 'module_name'
+> ```
+
+Для использования `Redis` в качестве транспорта сообщений или в качестве бэкэнда:
 
     pip3 install "celery[redis]"
 
@@ -146,19 +158,34 @@ Flower – это легкий веб-инструмент для монитор
 # CELERY
 # ===========================
 
-REDIS_HOST = '127.0.0.1'
-REDIS_PORT = 6379
+# временная зона 
+CELERY_TIMEZONE = TIME_ZONE
 
+# к какому redis обращаться
+REDIS_HOST = env.str('REDIS_HOST', default='127.0.0.1')
+REDIS_PORT = env.str('REDIS_PORT', default=6379)
+
+# брокер сообщений и бэкэнд результатов
 CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}/0'
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 
+# время соединения 
+CELERY_REDIS_SOCKET_TIMEOUT = 10
+CELERY_REDIS_SOCKET_CONNECT_TIMEOUT = 10
+
+# что использовать в качестве сериализатора, для передачи данных, 
+# дял бэкэнда результатов
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
 
+# если в задаче произошла ошибка, пробрасывать эту ошибку на верх или нет
 CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
+
+# максимальное время исполнения задачи 
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
+# указываем какой модуль:класс использовать для шедуллера(периодические задачи)
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 ```
 
