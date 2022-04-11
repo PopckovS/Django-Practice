@@ -342,6 +342,8 @@ Django Rest Framework `DRF`, `SSO`
 - **[ Установка HTML редактора `ckeditor` ](other/ckeditor.md)**
 - **[ Настройка сервера `PyCharm` для Дебага ](other/debug_server.md)**
 - **[ Трансляция, перевод на другие языки. ](other/translation.md)**
+- **[ Удобная работа с временными файлами `tempfile` ](other/tempfile.md)**
+- **[ Удобная работа архивами `zip` ](other/zip.md)**
 
 ---
 Тестирование
