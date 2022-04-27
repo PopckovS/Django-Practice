@@ -352,3 +352,53 @@ class BookList(generics.ListAPIView):
              Book.objects.filter(owner=user))
         print('='*180)
 ```
+
+---
+Точка API, 
+---
+
+Представми что у нашего API, есть необходимость при обращении `GET` давать одни 
+атрибуты обьекта, но при `PATCH` обновлять совершенно другие атрибуты обьекта, 
+то есть сериализовать не одни и те же атрибуты обьекта, разные атрибуты в зависимости
+от метода обращения, сделать это можно с помощью определения разных сериализаторов.
+
+Создадим 2 сериализатора, что обрабатывают разные поля обьекта
+```python
+class VpsSerializers(serializers.ModelSerializer):
+    """ Сериализатор для модели VpsModel """
+
+    class Meta:
+        model = VpsModel
+        fields = ['pk', 'cpu', 'ram', 'hdd', 'status']
+
+
+class VpsSerializerForStatus(serializers.ModelSerializer):
+    """ Сериализатор для модели VpsModel, сериализует поля для смены статуса """
+
+    class Meta:
+        model = VpsModel
+        fields = ['pk', 'status']
+```
+
+И определим разные сериализаторы для разных методов, при обращении к одной и той же
+сущьности
+```python
+class VpsRetrieveUpdate(generics.RetrieveUpdateAPIView):
+    """Точка API. Создание одной записи, обновление статуса."""
+    queryset = VpsModel.objects.all()
+    lookup_field = 'uid'
+
+    def retrieve(self, request, *args, **kwargs):
+        """Переопределяем род.метод, задаем сериализатор для одной записи"""
+        self.serializer_class = VpsSerializers
+        return super().retrieve(request, *args, **kwargs)
+
+    def update(self, request, *args, **kwargs):
+        """Переопределяем род.метод, задаем сериализатор для обновления статуса"""
+        self.serializer_class = VpsSerializerForStatus
+        return super().update(request, *args, **kwargs)
+```
+
+Теперь при обращении методом `GET` мы получаем сериализованными один набор атрибутов,
+а при обновлении, обновляем другой набор атрибутов обьекта.
+
