@@ -32,19 +32,6 @@ Backend разработка.
 
 2. **[ Механизм CI / CD ](Devops/Lesson_CI_CD.md)**
 
-
----
-СУБД `PostgresQL` и его администрирование
----
-
-1. **[ Часть №1 ](Postgres/postgres_1.md)**
-    - Утилита `psql`, `pg_dump`
-    - Взаимодействие с СУБД `Postgres` через терминал
-    - Расширение `TimescaleDB`
-
-
-2. **[ Часть №2 ](Postgres/postgres_2.md)**
-
 ---
 Сервер `Gunicorn` /  `Nginx` + `Django` 
 ---
