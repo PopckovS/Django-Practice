@@ -76,12 +76,17 @@ GIT и Git-flow
 ---
 **[ Удобный сборник команд `git` ](git/commands.md)**
 
-1. **[ Система контроля версий `GIT` ](git/git_1.md)**
+1. **[ Часть №1  `GIT` ](git/git_1.md)**
     - `git rebase`
     - Конфликты
     - Тэги `git tag`
     - Система ведения репозиториев `Git-flow`
-    
+
+
+2. **[ Часть №2 `GIT` ](git/git_2.md)**
+    - Хранилище `git stash`
+
+
 ---
 Работа с `GraphQL` и `Hasura`
 ---
