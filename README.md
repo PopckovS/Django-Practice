@@ -347,3 +347,6 @@ Django Rest Framework `DRF`, `SSO`
 
 [//]: # (4. **Cookiecutter**)
 [//]: # (      - [ Шаблоны Django проектов ]&#40;Django/cookiecutter_1.md&#41;)
+
+
+
