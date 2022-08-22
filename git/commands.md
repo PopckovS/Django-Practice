@@ -77,3 +77,39 @@
 
     git branch -m старое_название новое_название
     git push origin :старое_название новое_название
+
+---
+Удаление ветки 
+  
+      git branch -d [название ветки]
+      git branch -d test-1
+
+---
+Просмотр всех удаленных серверов
+  
+        git remote    
+
+---
+Просмотр всех URL удаленных серверов
+  
+      git remote -v
+
+---
+Установка имени/email для всей системы
+  
+        sudo git config --system user.name "soneko"
+        sudo git config --system user.email "soneko@email.ru"
+
+---  
+Установка имени/email глобально, для всех проектов конкретного
+    пользователя и используемый по дефолту редактор
+  
+        git config --global user.name "soneko"
+        git config --global user.email "soneko@email.ru"
+        git config --global core.editor emacs
+
+---
+Установка имени/email для конкретного проекта
+
+        git config user.name "soneko"
+        git config user.email "soneko@email.ru"
