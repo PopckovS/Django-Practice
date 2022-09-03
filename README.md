@@ -336,6 +336,7 @@ Django Rest Framework `DRF`, `SSO`
 - **[ Трансляция, перевод на другие языки. ](other/translation.md)**
 - **[ Удобная работа с временными файлами `tempfile` ](other/tempfile.md)**
 - **[ Удобная работа архивами `zip` ](other/zip.md)**
+- **[ Работа с файлами ](other/file.md)**
 
 ---
 Тестирование
