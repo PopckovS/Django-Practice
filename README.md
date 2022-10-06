@@ -77,6 +77,7 @@ GIT и Git-flow
 **[ Удобный сборник команд `git` ](git/commands.md)**
 
 1. **[ Часть №1  `GIT` ](git/git_1.md)**
+    - Настройка `git config`
     - `git rebase`
     - Конфликты
     - Тэги `git tag`
