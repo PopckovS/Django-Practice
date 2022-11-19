@@ -330,30 +330,18 @@ ADD . /code/
 `VOLUME`
 
 
+Просмотр статистики контейнеров`docker stats`
+---
 
+Запустив множество контейнеров, мы можем просматривать их статистику с помощью
+команды `docker stats`
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```python
+CONTAINER ID   NAME            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O         PIDS
+37fa0bc344b2   container_1     69.71%    12.29GiB / 19.55GiB   62.89%    516MB / 409kB     4.37GB / 26.3MB   1
+86ed66e9bce8   container_2     0.00%     590.1MiB / 19.55GiB   2.95%     3.45GB / 3.78MB   11.9GB / 0B       8
+2a9d0402dddc   container_3     0.00%     1.166GiB / 19.55GiB   5.97%     2.31GB / 2.91MB   47.7GB / 0B       9
+```
 
 Просмотр логов
 ---
@@ -369,3 +357,7 @@ ADD . /code/
 
     sudo docker logs 4461b7ad7f75 --follow
 
+Можно просматривать логи с указанием сколько именно последних сообщений
+следует вывести
+
+    sudo docker logs 4461b7ad7f75 --follow --tail=50
