@@ -88,6 +88,9 @@ GIT и Git-flow
     - Хранилище `git stash`
 
 
+3. **[Часть №3 `GIT` ](git/git_3.md)**
+    - Работа с `GIT` через `PyCharm`
+
 ---
 Работа с `GraphQL` и `Hasura`
 ---
@@ -96,14 +99,6 @@ GIT и Git-flow
     - Что такое `GraphQL`, `Hasura` в докере
     - Типы запросов `query`, `mutation`, `subscription`
     - Отношения `object` и `array`
-
-
----
-Фронт `Vue.js`
----
-
-1. **[ Часть №1 :](Vue/vue_1.md)**
-    - `Vue.js` установка, настройка, начало.
 
 ---
 Web
