@@ -68,7 +68,13 @@
 Поле `AutoField`
 ---
 
+Когда создается модель, поле `id` с автоинкрементом и связанной с ним
+последовательностью создается автоматически, по этому нет нужны создавать
+поле `id`, однако это все же можно сделать
 
+```python
+    id = models.AutoField(auto_created=True, primary_key=True)
+```
 
 ---
 Поле `CharField`
@@ -78,12 +84,13 @@
 Атрибуты:
 
 - `max_length` - указывает максимальное количество символов для этого поля.
+- `verbose_name` - название алиас которое будет использоваться в админке
+- `unique` - `bool` обеспечить уникальность записи в таблице 
 
 Пример: 
 ```python
 name = models.CharField(verbose_name='Название', max_length=100)
 ```
-
 
 ---
 Поле `TextField`
@@ -101,7 +108,9 @@ description = models.TextField(verbose_name='Описание')
 ---
 Поле истина/ложь.
 
-
+```python
+    is_active = models.BooleanField(default=True)
+```
 
 ---
 Поле `DateField`
@@ -140,6 +149,14 @@ description = models.TextField(verbose_name='Описание')
 ---
 Целое число.
 
+---
+Поле `JSONField`
+---
+Хранит строку формата `json`
+
+```python
+    json_field = models.JSONField(verbose_name='Настройки для шаблона')
+```
 
 ---
 Поле `PositiveIntegerField`
