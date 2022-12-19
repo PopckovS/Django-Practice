@@ -16,7 +16,8 @@
 
     import environ
 
-В файле настроек `settings.py` пропишем такой код:
+
+№1 Пример получения переменных окружения для Django проекта, файл `settings.py`
 
 ```python
 import environ
@@ -63,12 +64,32 @@ CACHES = {
 }
 ```
 
-Таким файлом настроек, мы можем получать доступ к переменным 
-окружения, которые лежат в директории с виртуальным окружением,
-и которые не будут комититься в репозиторий.
+№2 Пример получения переменных окружения для Django проекта, файл `settings.py`
+
+```python
+from pathlib import Path
+import environ
+import os
+
+# с помощью Path получаем путь кбазовой директории
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# удобным образом указываем путь к файлу .env
+env = environ.Env()
+PATH_TO_ENV_FILE = BASE_DIR.parent / '.env'
+env.read_env(PATH_TO_ENV_FILE)
+
+# получаем наши переменный окружения
+APP1 = env.bool('APP1')
+APP2 = env.str('APP2')
+APP3 = env.int('APP3')
+```
+
+Таким файлом настроек, мы можем получать доступ к переменным окружения, которые лежат
+в директории с виртуальным окружением, и которые не будут комититься в репозиторий.
 
 ---
-`env.bool` `env.str`
+Тип ожидаемой переменной окружения `env.bool`, `env.str` ...
 ---
 
 В зависимости от типа настроек мы используем разные методы получения 
@@ -88,36 +109,6 @@ env.str('MEDIA_URL', default='media/')
 Конвертация переменной окружения в тип `int`
 ```python
 env.int('NUMBER', default=10)
-```
-
----
-Простой пример настройки
----
-
-Пример установки переменных окружения в обычные настройки проекта, в настройках 
-`settings.py` есть специальная константа `BASE_DIR` которая ведет абсолютным
-путем прямо до корня проекта, ее можно удобно использовать что бы создать путь 
-до файла с переменными окружения `.env`
-
-```python
-import os
-import environ
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-# Настройки виртуального окружения
-env = environ.Env()
-
-# путь к файлу с переменными окружения
-env_file = os.path.join(str(BASE_DIR), '.env')
-
-# считываем переменные окружения из файла
-env.read_env(env_file)
-
-VAR_1 = env.str('VAR_1', 'VAR_1')
-VAR_2 = env.str('VAR_2', 'VAR_2')
-VAR_3 = env.str('VAR_3', 'VAR_3')
 ```
 
 ---
@@ -149,7 +140,7 @@ ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=[])
     # Указывать требуется именно с таким названием
     DATABASE_URL=postgres://postgres:123@127.0.0.1:5432/django_test_1
 
-У модуля `environ` ть спеуиальный метод `db_url()` который парсит
+У модуля `environ` есть специальный метод `db_url()` который парсит
 `DATABASE_URL` и конвертирует его в стандартный словарь настроек, 
 но требуется что бы название переменной окружения было именно с таким
 именем `DATABASE_URL`
