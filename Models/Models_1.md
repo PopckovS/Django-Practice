@@ -150,6 +150,50 @@ description = models.TextField(verbose_name='Описание')
 Поле `FileField`
 ---
 
+Пример хранения файла `zip`
+
+```python
+from django.db import models
+from django.core.validators import FileExtensionValidator
+
+class ZipModel(models.Models):
+
+    ...
+
+    zip_reports = models.FileField(
+        default=None, 
+        null=True, 
+        blank=True,
+        verbose_name='Zip архив',
+        upload_to=settings.DIR_ZIP,
+        validators=[
+            FileExtensionValidator(
+                message=f"Разрешенный формат : zip",
+                allowed_extensions='zip'
+            ),
+        ]
+    )
+
+```
+
+В `Django` происходит хранение как самого файла скаченного по указанному пути 
+так и сохранения записи в БД, однако при удалении записи из админки, происходит
+удаление только из БД, но сам файл не даляется физически, эта работа остается на
+пользователя, сделать это можно с помощтю системы сигналов, создадим сигнал для
+модели что будет удалять файл после удаления записи из БД.
+
+```python
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
+
+@receiver(post_delete, sender=DocBasketModel)
+def post_delete_basket(sender, instance, **kwargs):
+    """Удаляем связанный с записью zip архив"""
+    if os.path.isfile(instance.zip_reports.path):
+        os.remove(instance.zip_reports.path)
+```
+
+
 ---
 Поле `ImageField`
 ---
@@ -177,87 +221,6 @@ class MyUUIDModel(models.Model):
 ---
 Обычное поле `CharField` которое автоматически использует валидатор
 `EmailValidator` для проверки данных на содержание валидного `email`
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
----
----
----
----
----
----
----
----
----
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ---
 Создание связей между моделями
@@ -373,54 +336,6 @@ lesson.python_section_id
 name = models.CharField(max_length=100, db_index=True)
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 Полезный прием
 ---
@@ -444,27 +359,6 @@ class MyModel(models.Model):
 if field_name not in self.get_exclude_filter_fields():
     pass
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ---
 Ссылка поля модели на саму себя
@@ -490,4 +384,3 @@ parent_photo = models.ForeignKey(
      verbose_name='Поле с сылкой на самих себя'
 )
 ```
-
