@@ -177,6 +177,13 @@ def post_delete_basket(sender, instance, **kwargs):
 Поле `ImageField`
 ---
 
+В отличие от других сохраняемых статических файлов, при указании сохраняемых изображений
+можно использовать паттерны `upload_to="photos/%Y/%m/%d/"` что облегчит поиск.
+
+```python
+    image = models.ImageField(upload_to="photos/%Y/%m/%d/", blank=True, verbose_name='Фото')
+```
+    
 ---
 Поле `UUIDField`
 ---
