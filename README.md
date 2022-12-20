@@ -326,7 +326,6 @@ Django Rest Framework `DRF`, `SSO`
 Разное `Django`
 ---
 - **[ Флеш сообщения `messages` ](admin/admin_3.md)**
-- **[ Логирование `logging` ](other/logging_1.md)**
 - **[ Гео-кодирование, Модуль `GeoDjango` ](GeoDjango/geo_django_1.md)**
 - **[ Отправка почты Email `smtplib` ](other/email.md)**
 - **[ Установка HTML редактора `ckeditor` ](other/ckeditor.md)**
