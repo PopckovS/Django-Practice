@@ -292,6 +292,10 @@ Web
     - Что такое `Flower`
 
 
+3. [ `Django` + `Celery` + `Flower` менеджер асинхронных задач ](Celery/Celery_2.md)
+    - Что такое `Flower`
+
+
 3. **[ Django_rq ](Celery/django_rq_1.md)**
    - Что такое `Django_rq` 
    - Функции коллбэки `on_success`, `on_failure`

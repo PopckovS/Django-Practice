@@ -149,10 +149,38 @@ Flower – это легкий веб-инструмент для монитор
 Настройка `Celery`
 ---
 
-Создадим приложение `TimeOut` в настройках определим константы для
-работы приложения :
+Установим некоторые настройки.
 
-`TimeOut/settings.py`
+В качестве `Backend` результатов можно использовать как `Redis` так и БД самого `Django`
+
+Использование в качестве `Backend` результатов, БД `Django`
+```python
+CELERY_RESULT_BACKEND = "django-db"
+```
+
+Для использования этой возможности нам потребуется установить приложение для 
+хранения результатов тасок:
+
+`pip install django_celery_results`
+
+Это приложение создаст ряд таблиц в БД для хранения результатов, после исполнения тасок
+удачного или нет, результат их работы будет сохранен в БД.
+
+По дефолту при сохранении результатов тасок в БД они сохраняются без аргументов которые
+использовались для запуска тасок, чтобы это изменить и сохранять все приходящие аргументы,
+установите следующий параметр.
+
+```python
+CELERY_RESULT_EXTENDED = True
+```
+
+---
+Использование в качестве `Backend` результатов, БД `Redis`
+```python
+CELERY_RESULT_BACKEND = f'redis://127.0.0.1:6379/0'
+```
+
+Пример того как могут выглядеть настройки приложения `Celery`
 ```python
 # ===========================
 # CELERY
@@ -315,13 +343,13 @@ import time
 from django.conf import settings
 from .models import Post
 
-@app.task
+@app.shared_task(name="Add")
 def add(x, y):
     time.sleep(5)
     print(f'x + y = {x + y}')
 
 
-@app.task
+@app.shared_task(name="POST counter update")
 def post_counter_update():
     post = Post.objects.get(pk=1)
     post.view_count += 1
@@ -334,7 +362,7 @@ def post_counter_update():
 действия.
 
 Там где нам требуется вызвать функцию `add` асинхронно мы вызываем
-ее специальный метод `delay()`
+ее специальный метод `delay()` или метод `apply_async` их действие аналогично.
 
 ```python
     add.delay(4, 4)
