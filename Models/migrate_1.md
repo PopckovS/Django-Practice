@@ -311,6 +311,10 @@ test1
 ```
 
 ---
+Кастомизация миграций
+---
+
+---
 Чистый SQL в миграциях
 ---
 
@@ -342,3 +346,59 @@ class Migration(migrations.Migration):
 ```
 
 Таким образом можно выполнять любой SQL запрос в миграциях.
+
+---
+Исполнение `python` крипта в миграциях
+---
+
+Существует возможность исполнять `python` скрипт с использованием `ORM`
+в миграциях `Django`.
+
+Приме с файлом миграцией.
+```python
+import django.db.models.deletion
+from django.db import migrations, models
+
+# Функция будет исполнена в процессе работы миграции,
+def link_to_satellites(apps, schema_editor):
+    # Один из способов получения модели БД для работы
+    Model_one = apps.get_model('my_app', 'Model_one')
+    Model_two = apps.get_model('my_app', 'Model_two')
+    # Далее нужная логика работы с БД...
+    
+    
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('images', '0004_add_table'),
+    ]
+
+    operations = [
+        
+        # Вызываем функцию коллбек для исполнения
+        migrations.RunPython(link_to_bands),
+        
+        migrations.AddField(
+            model_name='test_model',
+            name='name',
+            field=models.BooleanField(default=False, verbose_name='Name'),
+        ),
+    ]
+```
+
+В случае если у нас есть потребность в `python` скрипте вызвать исполнение фикстур,
+то мы можем это сделать с помощью метода `django.core.management.call_command`
+
+```python
+import django.core.validators
+from django.db import migrations, models
+import django.db.models.deletion
+from django.core import management
+
+
+def exec_fixtures(apps, schema_editor):
+    management.call_command('loaddata', 'fixtures/one.json')
+    management.call_command('loaddata', 'fixtures/two.json')
+```
+
+Вызов команды `management.call_command` аналогичен вызову команды их консоли.
