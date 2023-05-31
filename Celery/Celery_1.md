@@ -289,6 +289,19 @@ CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
     CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
     ```
    
+9. Отслеживать таску при старте, по стандартному поведению, `Celery` запускает
+таски и сохраняет их в бэкенде результатов только после исполнения таски, 
+параметр `CELERY_TASK_TRACK_STARTED` включает отслеживание таски со старта.
+
+Если мы используем в качестве бэкэнда результатов БД самого `Django` что задается
+параметром `CELERY_RESULT_BACKEND = "django-db"` то в таблице 
+`django_celery_results_taskresult` при старте таски будет создана запись со 
+статусом `STARTED`
+
+```python
+CELERY_TASK_TRACK_STARTED=True
+```
+
 ---
 Создание Celery задач
 ---
