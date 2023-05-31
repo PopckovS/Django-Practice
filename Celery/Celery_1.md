@@ -476,6 +476,38 @@ Running migrations:
 ```
 
 ---
+Проверка состояния таски
+---
+
+Celery дает возможность проверять состояние запущенных тасок в процессе работы,
+для этого служит специальный модуль `celery.result.AsyncResult` который проверяет
+состояние таски по ее `UUID`
+```python
+from celery.result import AsyncResult
+
+@shared_task()
+def add(a, b):
+   return a + b
+
+run_task = add.delay(5 ,5)
+
+task_status = AsyncResult(run_task.id).status
+print(task_status)
+```
+Все `uuid` тасок доступны в таблице `django_celery_results_taskresult`, также запуская таску
+она будет содержать в себе аттрибут с `id` по которому можно проверить состояние таски.
+
+Для тасок доступно ряд состояний
+
+    SUCCESS - успешное завершение таски 
+    FAILURE  - таска упала с ошибкой
+    PENDING  - таска создана и помещена в очередь но еще не взята в работу
+    STARTED  - таска запущена в работу
+    REVOKED  - таска отменена
+    TIMEOUT  - время на отработку таски истекло
+    RETRY - таска перезапущена
+
+---
 Настройки для периодической работы
 ---
 
