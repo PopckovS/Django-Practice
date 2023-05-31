@@ -508,6 +508,56 @@ print(task_status)
     RETRY - таска перезапущена
 
 ---
+Отменить выполнение таски
+---
+Таску в `Celery` можно отменить по ее `uuid`, метод `revoke` модуля
+`celery.result.AsyncResult` отменяет таску, по стандартному поведению отмена таски
+переводит ее в статус `REVOKED` в бэкенде результатов, но не останавливает ее выполнение
+в самом воркере, чтобы немедленно остановить таску непосредственно в самом воркере
+следует добавить параметр `terminate=True` что немедленно остановит выполнение таски.
+
+```python
+from celery.result import AsyncResult
+
+@shared_task()
+def add(a, b):
+   return a + b
+
+run_task = add.delay(5 ,5)
+
+print(AsyncResult(run_task.id).status)
+AsyncResult(task_uuid).revoke(terminate=True)
+print(task_status = AsyncResult(run_task.id).status)
+```
+
+---
+Перезапуск таски
+---
+
+На данный момент я не смог найти никакого способа перезапуска одной и той же самой таски,
+но таску можно пересоздать с теми же аргументами, по стандартному поведению `Celery` не
+запоминает аргументов приходящих в таску, чтобы это изменить установим параметр
+`CELERY_RESULT_EXTENDED = True` теперь все аргументы `args`, `kwargs` будут сохраняться в
+модели `django_celery_results_taskresult` откуда их можно будет получить имея `uuid` таски.
+
+А далее просто перезапустить таску с теми же самыми аргументами, доступ к модели 
+хранящей результаты выполнения тасок `django_celery_results.models.TaskResult`
+
+```python
+@shared_task()
+def add(a, b):
+   return a + b
+
+# запускаем таску №1
+run_task = add.apply_async(5 ,5)
+
+task_result = TaskResult.objects.get(task_id=run_task.id)
+
+# запускаем таску №2
+add.apply_async(kwargs=eval(json.loads(task_result.task_kwargs)))
+```
+
+---
 Настройки для периодической работы
 ---
 
