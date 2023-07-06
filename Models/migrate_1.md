@@ -402,3 +402,74 @@ def exec_fixtures(apps, schema_editor):
 ```
 
 Вызов команды `management.call_command` аналогичен вызову команды их консоли.
+
+---
+Обратные миграции `reverse_sql`
+---
+
+[Ссылка на документацию](https://docs.djangoproject.com/en/3.2/ref/migration-operations/#runsql)
+
+Миграции можно как накатывать так и откатить, но это работает только когда сами
+миграции сгенерированы самим `Django`, в случае если мы используем в миграциях 
+`migrations.RunSQL` то есть используем чистый `SQL` в перемешку с кодом миграций
+самого `Django`, то в этом случае откатить миграцию нет возможности, `Django` просто
+не знает какой должен быть обратный `SQL` запрос.
+
+Это можно изменить с помощью создания обратной `SQL` миграции, которая указывается в
+аттрибуте `reverse_sql` той же команды `migrations.RunSQL`, при совершении отката,
+именно этот `SQL` будет использоваться `Django`.
+
+Пример обратной миграции:
+
+```python
+class Migration(migrations.Migration):
+
+    dependencies = []
+
+    operations = [
+        migrations.RemoveConstraint(
+            # ...
+        ),
+        migrations.AddField(
+            # ...
+        ),
+
+        migrations.RunSQL(
+            # Этот SQL будет выполнен при использовании миграции
+            sql=[(
+                """
+                UPDATE public.test_table
+                SET status = 
+                  CASE 
+                    WHEN status = 'A' THEN 'AA'
+                    WHEN status = 'B' THEN 'BB'
+                    ELSE status
+                  END;
+                """
+            )],
+            
+            # Этот SQL будет выполнен при откате миграции 
+            reverse_sql=[(
+                """
+                UPDATE public.test_table
+                SET status = 
+                  CASE 
+                    WHEN status = 'AA' THEN 'A'
+                    WHEN status = 'BB' THEN 'B'
+                    ELSE status
+                  END;
+                """
+            )]
+        ),
+
+        migrations.AlterField(
+            # ...
+        ),
+        migrations.AlterField(
+            # ...
+        ),
+        migrations.AddConstraint(
+            # ...
+        ),
+    ]
+```
