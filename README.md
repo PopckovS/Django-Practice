@@ -289,15 +289,14 @@ Web
     - Установка, Настройка, периодические задачи
     
 
-2. [ `Django` + `Celery` + `Flower` менеджер асинхронных задач ](Celery/Celery_2.md)
+2. [ `Celery` настройка ](Celery/Celery_2.md)
+
+
+3. [ `Django` + `Celery` + `Flower` менеджер асинхронных задач ](Celery/Celery_3.md)
     - Что такое `Flower`
 
 
-3. [ `Django` + `Celery` + `Flower` менеджер асинхронных задач ](Celery/Celery_2.md)
-    - Что такое `Flower`
-
-
-3. **[ Django_rq ](Celery/django_rq_1.md)**
+4. **[ Django_rq ](Celery/django_rq_1.md)**
    - Что такое `Django_rq` 
    - Функции коллбэки `on_success`, `on_failure`
    - Как отлаживать асинхронный код в `django-rq`
