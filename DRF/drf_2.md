@@ -151,6 +151,31 @@ class BookViewSet(ModelViewSet):
 
 ---
 
+Другой способ не определять фильтры в самом классе представления, а создать
+отдельный класс для фильтрации, в котором можно определить различный способы 
+фильтрации разных полей.
+
+```python
+import django_filters
+from django_filters import rest_framework as filters
+
+class MyFilter(django_filters.FilterSet):
+    # Искать все что меньше и больше конкретных дат
+    start_date = filters.DateFilter(field_name="start_date", lookup_expr="gte")
+    stop_date = filters.DateFilter(field_name="stop_date", lookup_expr="lte")
+    # Искать вхождение подстроки.
+    name = filters.CharFilter(lookup_expr="icontains")
+    # Искать точное соответствие числу.
+    num = filters.NumberFilter()
+
+    class Meta:
+        model = MyModel
+        fields = ["name", "num", "start_date", "stop_date"]
+```
+
+В самом сериализаторе мы указываем класс фильтрации как обычный список `filter_backends` 
+
+---
 Фильтр `SearchFilter`
 ---
 

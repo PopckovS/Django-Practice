@@ -320,6 +320,7 @@ Django Rest Framework `DRF`, `SSO`
       - **[ API Фильтрация, Поиск, Сортировка ](DRF/drf_2.md)**
       - **[ Аутентификация `OAuth` ](DRF/drf_3.md)**
       - **[ Документирование `Swagger` ](DRF/drf_4.md)**
+      - **[ Права доступа `Permissions` ](DRF/permissions_5.md)**
       
 
 2.  **[ Django Rest Framework SSO ](DRF-SSO/drf-sso_1.md)**
