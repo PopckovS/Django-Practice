@@ -230,3 +230,67 @@ _qs = model_class.objects\
     .filter(dt__time__gte='10:00', dt__time__lte='12:00')
 ```
 
+---
+`Q` Объект
+---
+
+`Q` объекты, это условные SQL выражения для обработки `queryset` запросов,
+ с его помощью можно манипулировать условиями для фильтрации `queryset`
+как логическими выражениями в `python`
+
+```python
+from django.db.models import Q
+from Model import MyModel
+
+qs = MyModel.objects.all()
+
+# Вариант №1 использование обычной фильтрации queryset
+qs = qs.filter(name="admin", num__in=[1, 2, 3, 4, 5])
+
+# Вариант №2 использование объекта Q
+_query = Q(name="admin", num__in=[1, 2, 3, 4, 5])
+qs = qs.filter(_query)
+```
+
+Они поддерживают операции
+
+1) `AND` эквивалентен &
+2) `OR` эквивалентен |
+3) `NOT` эквивалентен ~
+
+Примеры
+```python
+# Где name="admin" или num входит в список [1, 2, 3, 4, 5]
+Q(name="admin") | Q(num__in=[1, 2, 3, 4, 5])
+```
+
+```python
+# Где name="admin" и num входит в список [1, 2, 3, 4, 5]
+Q(name="admin") & Q(num__in=[1, 2, 3, 4, 5])
+```
+
+```python
+# Где name="admin" и num не входит в список [1, 2, 3, 4, 5]
+Q(name="admin") & ~Q(num__in=[1, 2, 3, 4, 5])
+```
+
+Иногда может потребоваться пройтись по множеству условий 
+и соединить все запросы для фильтрации в один, это можно сделать 
+проходя по ряду условий и последовательно соединяя правила для фильтрации.
+
+```python
+from django.db.models import Q
+from Model import MyModel
+
+num = [1, 2, 3, 4, 5]
+_query = Q()
+
+if name == "admin":
+    _query |= Q(name="admin")
+if payment_id == 5:
+    _query |= Q(payment_id=5)
+if num:
+    _query |= Q(num__in=num)
+    
+qs = MyModel.objects.filter(_query)
+```
